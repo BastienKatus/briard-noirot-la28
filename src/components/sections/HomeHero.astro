@@ -3,12 +3,15 @@ import { Image } from 'astro:assets';
 import { hero } from '../../data/accueil';
 import { photo } from '../../lib/photos';
 import { url } from '../../lib/url';
+import { pad, remaining } from '../../lib/countdown';
+
+const left = remaining(hero.countdown.target);
 ---
 
-<section class="hero container">
+<section class="hero container" style={`--scale: ${hero.photoScale}; --position: ${hero.photoPosition}`}>
 	<Image
 		class="bg"
-		src={photo('double-lever-du-jour.jpg')}
+		src={photo(hero.photo)}
 		alt=""
 		widths={[800, 1280, 1600]}
 		sizes="100vw"
@@ -29,12 +32,37 @@ import { url } from '../../lib/url';
 			hero.facts.map((fact) => (
 				<li>
 					<strong>{fact.value}</strong>
-					<span>{fact.label}</span>
+					<span class="label">{fact.label}</span>
 				</li>
 			))
 		}
+		<li class="countdown" data-countdown={hero.countdown.target}>
+			<strong role="timer">
+				<span data-d>{left.d}</span><small>j</small>
+				<span data-h>{pad(left.h)}</span><small>h</small>
+				<span data-m>{pad(left.m)}</span><small>min</small>
+				<span data-s>{pad(left.s)}</span><small>s</small>
+			</strong>
+			<span class="label">{hero.countdown.label}</span>
+			<span class="date">{hero.countdown.date}</span>
+		</li>
 	</ul>
 </section>
+
+<script>
+	import { pad, remaining } from '../../lib/countdown';
+
+	for (const box of document.querySelectorAll<HTMLElement>('[data-countdown]')) {
+		const target = box.dataset.countdown!;
+		const fields = (['d', 'h', 'm', 's'] as const).map((key) => [key, box.querySelector(`[data-${key}]`)!] as const);
+		const tick = () => {
+			const left = remaining(target);
+			for (const [key, el] of fields) el.textContent = key === 'd' ? String(left.d) : pad(left[key]);
+		};
+		tick();
+		setInterval(tick, 1000);
+	}
+</script>
 
 <style>
 	.hero {
@@ -57,7 +85,15 @@ import { url } from '../../lib/url';
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		object-position: center 60%;
+		object-position: center 45%;
+	}
+
+	@media (min-width: 900px) {
+		.hero :global(.bg) {
+			width: calc(var(--scale) * 100%);
+			max-width: none;
+			object-position: var(--position);
+		}
 	}
 
 	.hero::after {
@@ -97,7 +133,7 @@ import { url } from '../../lib/url';
 
 	.facts {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: 1fr 1fr 1.35fr;
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -119,9 +155,37 @@ import { url } from '../../lib/url';
 		line-height: 1.1;
 	}
 
-	.facts span {
+	.label {
 		font-size: 0.88rem;
 		color: rgb(255 255 255 / 0.8);
+	}
+
+	.countdown strong {
+		display: flex;
+		align-items: baseline;
+		gap: 2px 3px;
+		flex-wrap: wrap;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.countdown small {
+		margin-right: 7px;
+		font-size: 0.5em;
+		font-weight: 700;
+		color: rgb(255 255 255 / 0.7);
+	}
+
+	.countdown small:last-child {
+		margin-right: 0;
+	}
+
+	.date {
+		margin-top: 2px;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: rgb(255 255 255 / 0.6);
 	}
 
 	@media (max-width: 720px) {

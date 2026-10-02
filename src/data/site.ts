@@ -22,5 +22,8 @@ export const site = {
 		projectSlug: '',
 		// Objectif affiché tant que la plateforme ne fournit pas le sien. Les CGU plafonnent une cagnotte à 20 000 €.
 		goal: 20000,
+		// Montant affiché tant que la jauge ne lit pas la plateforme (slug vide ou plateforme injoignable).
+		// Valeur fictive de démonstration : la remettre à 0 ou au vrai montant avant la mise en ligne.
+		initialRaised: 7400,
 	},
 };
