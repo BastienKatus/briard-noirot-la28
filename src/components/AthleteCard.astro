@@ -1,0 +1,170 @@
+---
+import { Image } from 'astro:assets';
+import ResultItem from './ResultItem.astro';
+import type { Athlete } from '../data/athletes';
+import { sortByYear } from '../data/palmares';
+import { photo } from '../lib/photos';
+import { url } from '../lib/url';
+
+interface Props {
+	athlete: Athlete;
+}
+
+const { athlete } = Astro.props;
+const highlights = sortByYear(athlete.results.filter((result) => result.highlight)).slice(0, 3);
+---
+
+<article class="card glass" id={`rameur-${athlete.id}`}>
+	<div class="media">
+		<Image
+			src={photo(athlete.photo)}
+			alt={athlete.photoAlt}
+			widths={[480, 800, 1100]}
+			sizes="(max-width: 860px) 100vw, 560px"
+			style={athlete.photoPosition ? `object-position: ${athlete.photoPosition}` : undefined}
+		/>
+		<p class="discipline glass-dark">{athlete.discipline}</p>
+	</div>
+
+	<div class="body">
+		<h3>
+			<span class="first">{athlete.firstName}</span>{' '}{athlete.lastName}
+		</h3>
+		<ul class="tags">
+			{athlete.tags.map((tag) => <li class="tag">{tag}</li>)}
+		</ul>
+
+		{athlete.bio.map((paragraph) => <p class="bio">{paragraph}</p>)}
+
+		{
+			athlete.aside && (
+				<aside class="aside">
+					<p class="aside-label">{athlete.aside.label}</p>
+					<p class="aside-text">{athlete.aside.text}</p>
+					<p class="aside-source">{athlete.aside.source}</p>
+				</aside>
+			)
+		}
+
+		<h4>Palmarès</h4>
+		<ul class="results">
+			{highlights.map((result) => <ResultItem result={result} compact />)}
+		</ul>
+		<a class="more" href={url(`/palmares/#${athlete.id}`)}>Tout le palmarès de {athlete.firstName} →</a>
+	</div>
+</article>
+
+<style>
+	.card {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		border-radius: var(--radius-xl);
+	}
+
+	.media {
+		position: relative;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+	}
+
+	.media :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.discipline {
+		position: absolute;
+		left: 16px;
+		bottom: 16px;
+		margin: 0;
+		padding: 8px 16px;
+		border-radius: 999px;
+		font-size: 0.85rem;
+		font-weight: 700;
+	}
+
+	.body {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		padding: clamp(22px, 3vw, 32px);
+	}
+
+	h3 {
+		font-size: clamp(1.8rem, 3vw, 2.2rem);
+		font-weight: 800;
+	}
+
+	.first {
+		color: var(--blue);
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin: 14px 0 18px;
+		padding: 0;
+		list-style: none;
+	}
+
+	.bio {
+		color: var(--ink-soft);
+	}
+
+	.aside {
+		margin: 4px 0 8px;
+		padding: 14px 18px;
+		border-left: 4px solid var(--red);
+		border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+		background: rgb(255 255 255 / 0.55);
+	}
+
+	.aside p {
+		margin: 0;
+	}
+
+	.aside-label {
+		font-size: 0.75rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--red);
+	}
+
+	.aside-text {
+		font-weight: 600;
+		color: var(--navy-950);
+	}
+
+	.aside-source {
+		font-size: 0.8rem;
+		color: var(--ink-soft);
+	}
+
+	h4 {
+		margin: 20px 0 4px;
+		font-size: 0.8rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--ink-soft);
+	}
+
+	.results {
+		margin: 0 0 16px;
+		padding: 0;
+		list-style: none;
+	}
+
+	.more {
+		margin-top: auto;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.more:hover {
+		text-decoration: underline;
+	}
+</style>

@@ -1,0 +1,165 @@
+---
+import { site } from '../data/site';
+
+const topics = ['Mécénat / don d’entreprise', 'Sponsoring', 'Presse', 'Autre'];
+---
+
+<section id="contact" class="section">
+	<div class="container contact glass">
+		<div class="intro">
+			<p class="eyebrow">Entreprises & partenaires</p>
+			<h2>Embarquez avec nous jusqu’à Los Angeles</h2>
+			<p class="lead">
+				Votre entreprise souhaite faire un don ou devenir sponsor ? Écrivez-nous directement : nous construisons chaque
+				partenariat sur mesure.
+			</p>
+			<ul class="perks">
+				<li><strong>Mécénat</strong> : don via la Fondation du Sport Français, ouvrant droit à une réduction d’impôt.</li>
+				<li><strong>Sponsoring</strong> : visibilité sur nos tenues, notre bateau et nos réseaux.</li>
+				<li><strong>Rencontres</strong> : interventions et moments de partage avec vos équipes.</li>
+			</ul>
+		</div>
+
+		<form class="form" action={`mailto:${site.contactEmail}`} method="post" enctype="text/plain" data-contact={site.contactEmail}>
+			<div class="row">
+				<label>
+					<span>Nom</span>
+					<input name="nom" autocomplete="name" required />
+				</label>
+				<label>
+					<span>Entreprise</span>
+					<input name="entreprise" autocomplete="organization" />
+				</label>
+			</div>
+			<label>
+				<span>E-mail</span>
+				<input name="email" type="email" autocomplete="email" required />
+			</label>
+			<label>
+				<span>Objet</span>
+				<select name="objet">
+					{topics.map((topic) => <option>{topic}</option>)}
+				</select>
+			</label>
+			<label>
+				<span>Message</span>
+				<textarea name="message" rows="5" required></textarea>
+			</label>
+			<button class="btn btn-navy" type="submit">Envoyer le message</button>
+			<p class="hint">
+				Le bouton ouvre votre messagerie avec le message prêt à partir. Vous pouvez aussi écrire à{' '}
+				<a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.
+			</p>
+		</form>
+	</div>
+</section>
+
+<script>
+	for (const form of document.querySelectorAll<HTMLFormElement>('form[data-contact]')) {
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const data = new FormData(form);
+			const field = (name: string) => String(data.get(name) ?? '').trim();
+			const lines = [`Nom : ${field('nom')}`];
+			if (field('entreprise')) lines.push(`Entreprise : ${field('entreprise')}`);
+			lines.push(`E-mail : ${field('email')}`, '', field('message'));
+			const subject = `[${field('objet')}] ${field('entreprise') || field('nom')}`;
+			window.location.href = `mailto:${form.dataset.contact}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+		});
+	}
+</script>
+
+<style>
+	.contact {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(24px, 5vw, 56px);
+		padding: clamp(24px, 5vw, 56px);
+		border-radius: var(--radius-xl);
+	}
+
+	.perks {
+		display: grid;
+		gap: 10px;
+		margin: 24px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.perks li {
+		padding: 12px 16px;
+		border-radius: var(--radius-md);
+		background: rgb(255 255 255 / 0.55);
+		color: var(--ink-soft);
+		font-size: 0.95rem;
+	}
+
+	.perks strong {
+		color: var(--navy-950);
+	}
+
+	.form {
+		display: grid;
+		gap: 14px;
+		align-content: start;
+	}
+
+	.row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 14px;
+	}
+
+	label {
+		display: grid;
+		gap: 6px;
+	}
+
+	label span {
+		font-size: 0.85rem;
+		font-weight: 700;
+		color: var(--navy-900);
+	}
+
+	input,
+	select,
+	textarea {
+		width: 100%;
+		padding: 12px 16px;
+		border: 1px solid rgb(16 32 90 / 0.14);
+		border-radius: var(--radius-sm);
+		background: rgb(255 255 255 / 0.8);
+		color: var(--ink);
+		font: inherit;
+		font-size: 0.98rem;
+	}
+
+	textarea {
+		resize: vertical;
+	}
+
+	input:focus,
+	select:focus,
+	textarea:focus {
+		outline: none;
+		border-color: var(--blue);
+		box-shadow: 0 0 0 4px rgb(0 85 164 / 0.15);
+	}
+
+	.btn {
+		justify-self: start;
+	}
+
+	.hint {
+		margin: 0;
+		font-size: 0.85rem;
+		color: var(--ink-soft);
+	}
+
+	@media (max-width: 860px) {
+		.contact,
+		.row {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
