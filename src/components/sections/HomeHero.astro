@@ -1,0 +1,141 @@
+---
+import { Image } from 'astro:assets';
+import { hero } from '../../data/accueil';
+import { photo } from '../../lib/photos';
+import { url } from '../../lib/url';
+---
+
+<section class="hero container">
+	<Image
+		class="bg"
+		src={photo('double-lever-du-jour.jpg')}
+		alt=""
+		widths={[800, 1280, 1600]}
+		sizes="100vw"
+		loading="eager"
+		fetchpriority="high"
+	/>
+	<div class="content">
+		<p class="eyebrow">{hero.eyebrow}</p>
+		<h1>{hero.title}</h1>
+		<p class="lead">{hero.lead}</p>
+		<div class="ctas">
+			<a class="btn btn-primary" href={url('/#soutenir')}>Soutenir le projet</a>
+			<a class="btn btn-glass" href={url('/#rameurs')}>Découvrir les rameurs</a>
+		</div>
+	</div>
+	<ul class="facts glass-dark">
+		{
+			hero.facts.map((fact) => (
+				<li>
+					<strong>{fact.value}</strong>
+					<span>{fact.label}</span>
+				</li>
+			))
+		}
+	</ul>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		display: grid;
+		align-content: space-between;
+		gap: 48px;
+		min-height: min(86vh, 760px);
+		margin-top: 20px;
+		padding: clamp(28px, 6vw, 72px);
+		overflow: hidden;
+		border-radius: var(--radius-xl);
+		isolation: isolate;
+	}
+
+	.hero :global(.bg) {
+		position: absolute;
+		inset: 0;
+		z-index: -2;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 60%;
+	}
+
+	.hero::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background:
+			linear-gradient(100deg, rgb(10 20 56 / 0.82) 0%, rgb(10 20 56 / 0.5) 45%, rgb(10 20 56 / 0.05) 75%),
+			linear-gradient(0deg, rgb(10 20 56 / 0.45), transparent 40%);
+	}
+
+	.content {
+		max-width: 640px;
+		align-self: center;
+	}
+
+	.eyebrow {
+		color: var(--white);
+	}
+
+	h1 {
+		color: var(--white);
+		text-wrap: balance;
+	}
+
+	.lead {
+		margin: 20px 0 32px;
+		color: rgb(255 255 255 / 0.88);
+	}
+
+	.ctas {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.facts {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.facts li {
+		display: grid;
+		gap: 2px;
+		padding: 20px 24px;
+	}
+
+	.facts li + li {
+		border-left: 1px solid var(--glass-dark-border);
+	}
+
+	.facts strong {
+		font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+		font-weight: 800;
+		line-height: 1.1;
+	}
+
+	.facts span {
+		font-size: 0.88rem;
+		color: rgb(255 255 255 / 0.8);
+	}
+
+	@media (max-width: 720px) {
+		.facts {
+			grid-template-columns: 1fr;
+		}
+
+		.facts li {
+			padding: 14px 20px;
+		}
+
+		.facts li + li {
+			border-left: 0;
+			border-top: 1px solid var(--glass-dark-border);
+		}
+	}
+</style>

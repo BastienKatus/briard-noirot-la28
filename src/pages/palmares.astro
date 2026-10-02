@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ResultItem from '../components/ResultItem.astro';
+import { athletes } from '../data/athletes';
+import { duo, sortByYear } from '../data/palmares';
+
+const all = athletes.flatMap((athlete) => athlete.results);
+const stats = [
+	{ value: all.filter((r) => r.level === 'monde' && r.medal).length, label: 'médailles mondiales' },
+	{ value: all.filter((r) => r.level === 'france' && r.medal === 'gold').length, label: 'titres de champion de France' },
+	{ value: 'LA 2028', label: 'l’objectif commun' },
+];
+
+---
+
+<BaseLayout title="Palmarès" description="Palmarès de Chloé Briard et Vincent Noirot : résultats mondiaux, européens et nationaux en aviron de mer et beach sprint.">
+	<PageHeader
+		eyebrow="Palmarès"
+		title="Les résultats"
+		lead="Championnats du monde, d’Europe et de France : le parcours de Chloé et Vincent en aviron de mer et en beach sprint."
+		image="antalya-2025-podium-4.jpg"
+	/>
+
+	<section class="section stats-section">
+		<div class="container">
+			<ul class="stats">
+				{
+					stats.map((stat) => (
+						<li class="glass">
+							<strong>{stat.value}</strong>
+							<span>{stat.label}</span>
+						</li>
+					))
+				}
+			</ul>
+
+			{
+				duo.length > 0 && (
+					<div class="duo glass-dark">
+						<p class="eyebrow">En duo</p>
+						<ul>
+							{duo.map((item) => (
+								<li>
+									<strong>
+										{item.year} · {item.title}
+									</strong>
+									<span> · {item.detail}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+				)
+			}
+		</div>
+	</section>
+
+	<section class="section results-section">
+		<div class="container columns">
+			{
+				athletes.map((athlete) => (
+					<article id={athlete.id} class="athlete glass">
+						<h2>
+							<span>{athlete.firstName}</span> {athlete.lastName}
+						</h2>
+						<p class="discipline">{athlete.discipline}</p>
+						<ul class="results">
+							{sortByYear(athlete.results).map((result) => (
+								<ResultItem result={result} />
+							))}
+						</ul>
+					</article>
+				))
+			}
+		</div>
+		<p class="container note">
+			Palmarès établi à partir de sources publiques (World Rowing, FFAviron, Mag Aviron, presse régionale), à compléter.
+		</p>
+	</section>
+</BaseLayout>
+
+<style>
+	.stats-section {
+		padding-bottom: 0;
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 16px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.stats li {
+		display: grid;
+		gap: 4px;
+		padding: 24px 28px;
+	}
+
+	.stats strong {
+		font-size: clamp(2.4rem, 5vw, 3.2rem);
+		font-weight: 800;
+		line-height: 1;
+		color: var(--navy-950);
+	}
+
+	.stats span {
+		color: var(--ink-soft);
+		font-weight: 600;
+	}
+
+	.duo {
+		margin-top: 16px;
+		padding: 24px 28px;
+		background: linear-gradient(135deg, var(--navy-900), var(--navy-950));
+		border-color: transparent;
+	}
+
+	.duo .eyebrow {
+		color: var(--white);
+	}
+
+	.duo ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		color: rgb(255 255 255 / 0.85);
+	}
+
+	.duo strong {
+		color: var(--white);
+	}
+
+	.results-section {
+		padding-top: 24px;
+	}
+
+	.columns {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+		align-items: start;
+	}
+
+	.athlete {
+		padding: clamp(22px, 3vw, 36px);
+		border-radius: var(--radius-xl);
+	}
+
+	.athlete h2 {
+		font-size: clamp(1.7rem, 3vw, 2.2rem);
+	}
+
+	.athlete h2 span {
+		color: var(--blue);
+	}
+
+	.discipline {
+		margin: 6px 0 12px;
+		color: var(--ink-soft);
+		font-weight: 600;
+	}
+
+	.results {
+		margin: 8px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.note {
+		margin-top: 24px;
+		font-size: 0.88rem;
+		color: var(--ink-soft);
+	}
+
+	@media (max-width: 960px) {
+		.columns {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.stats {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

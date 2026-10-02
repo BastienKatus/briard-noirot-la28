@@ -1,0 +1,30 @@
+---
+import AthleteCard from '../AthleteCard.astro';
+import { athletes } from '../../data/athletes';
+---
+
+<section id="rameurs" class="section">
+	<div class="container">
+		<p class="eyebrow">Les rameurs</p>
+		<h2>Deux solos, un double mixte</h2>
+		<p class="lead">Licenciés à l’Aviron Club Lyon-Caluire et membres de l’équipe de France de beach sprint.</p>
+		<div class="grid">
+			{athletes.map((athlete) => <AthleteCard athlete={athlete} />)}
+		</div>
+	</div>
+</section>
+
+<style>
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+		margin-top: 36px;
+	}
+
+	@media (max-width: 860px) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

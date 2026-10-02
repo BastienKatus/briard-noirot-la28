@@ -1,0 +1,79 @@
+---
+import { site } from '../data/site';
+import { url } from '../lib/url';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="container inner glass">
+		<div class="about">
+			<p class="name">{site.name}</p>
+			<p class="small">Beach sprint · Équipe de France d’aviron · Objectif Los Angeles 2028</p>
+		</div>
+		<nav class="links" aria-label="Pied de page">
+			{site.nav.map((item) => <a href={url(item.href)}>{item.label}</a>)}
+			<a href={url('/infos/#mentions-legales')}>Mentions légales</a>
+		</nav>
+		<p class="small copyright">
+			© {year} {site.name} · Dons collectés par la Fondation du Sport Français via{' '}
+			<a href={site.donation.platformUrl} target="_blank" rel="noopener">{site.donation.platformName}</a>
+		</p>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		padding-bottom: 24px;
+	}
+
+	.inner {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 16px 32px;
+		align-items: center;
+		padding: 28px 32px;
+	}
+
+	.name {
+		margin: 0;
+		font-weight: 800;
+		color: var(--navy-950);
+	}
+
+	.small {
+		margin: 0;
+		font-size: 0.88rem;
+		color: var(--ink-soft);
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px 20px;
+	}
+
+	.links a {
+		color: var(--ink);
+		font-size: 0.92rem;
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.links a:hover {
+		color: var(--blue);
+	}
+
+	.copyright {
+		grid-column: 1 / -1;
+		padding-top: 16px;
+		border-top: 1px solid rgb(16 32 90 / 0.1);
+	}
+
+	@media (max-width: 720px) {
+		.inner {
+			grid-template-columns: 1fr;
+			padding: 24px;
+		}
+	}
+</style>

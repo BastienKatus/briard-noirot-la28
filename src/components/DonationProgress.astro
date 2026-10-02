@@ -1,0 +1,147 @@
+---
+import { site } from '../data/site';
+
+const { platformName, platformUrl, projectSlug, goal } = site.donation;
+const projectUrl = projectSlug ? new URL(`project/${projectSlug}`, platformUrl).href : '';
+const donateUrl = projectSlug ? `${projectUrl}/donate` : platformUrl;
+const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+---
+
+<div class="donation glass" data-donation data-endpoint={projectSlug ? `${projectUrl}.json` : undefined} data-goal={goal}>
+	<div class="top">
+		<p class="status" data-status>
+			<span class="dot" aria-hidden="true"></span>
+			{projectSlug ? 'Collecte en cours' : 'Collecte bientôt en ligne'}
+		</p>
+		<p class="amount">
+			<strong data-raised>{euro.format(0)}</strong>
+			<span>collectés sur <span data-goal-label>{euro.format(goal)}</span></span>
+		</p>
+	</div>
+
+	<div class="track" role="progressbar" aria-label="Progression de la collecte" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-track>
+		<div class="fill" data-fill></div>
+	</div>
+
+	<div class="meta">
+		<span data-percent>0 %</span>
+		<span data-donors></span>
+	</div>
+
+	<a class="btn btn-primary" href={donateUrl} target="_blank" rel="noopener">
+		{projectSlug ? 'Faire un don' : `Découvrir ${platformName}`}
+	</a>
+	<p class="note">
+		Paiement sécurisé sur {platformName}, la plateforme de la Fondation du Sport Français, qui vous envoie le reçu
+		fiscal par e-mail : un don de 100 € vous revient à 34 € après réduction d’impôt.
+	</p>
+</div>
+
+<script>
+	const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+
+	// Endpoint non documenté de la plateforme (iRaiser) : en cas d'échec ou de changement de format,
+	// la jauge garde son état initial et le bouton de don reste utilisable.
+	for (const box of document.querySelectorAll<HTMLElement>('[data-donation][data-endpoint]')) {
+		fetch(box.dataset.endpoint!)
+			.then((response) => (response.ok ? response.json() : Promise.reject(response.status)))
+			.then(({ project }) => {
+				const raised = Number(project.total_amount);
+				const goal = Number(project.target_amount) || Number(box.dataset.goal);
+				if (!Number.isFinite(raised) || !goal) return;
+
+				const percent = Math.round((raised / goal) * 100);
+				box.querySelector('[data-raised]')!.textContent = euro.format(raised);
+				box.querySelector('[data-goal-label]')!.textContent = euro.format(goal);
+				box.querySelector('[data-percent]')!.textContent = `${percent} %`;
+				box.querySelector<HTMLElement>('[data-fill]')!.style.width = `${Math.min(percent, 100)}%`;
+				box.querySelector('[data-track]')!.setAttribute('aria-valuenow', String(Math.min(percent, 100)));
+				const donors = Number(project.total_donations);
+				if (donors) box.querySelector('[data-donors]')!.textContent = `${donors} don${donors > 1 ? 's' : ''}`;
+			})
+			.catch(() => {});
+	}
+</script>
+
+<style>
+	.donation {
+		display: grid;
+		gap: 16px;
+		padding: clamp(24px, 4vw, 36px);
+		border-radius: var(--radius-xl);
+	}
+
+	.top {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: end;
+		justify-content: space-between;
+		gap: 8px 24px;
+	}
+
+	.status {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0;
+		font-size: 0.85rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--ink-soft);
+	}
+
+	.dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--red);
+		box-shadow: 0 0 0 4px rgb(239 65 53 / 0.18);
+	}
+
+	.amount {
+		margin: 0;
+		color: var(--ink-soft);
+	}
+
+	.amount strong {
+		margin-right: 6px;
+		font-size: clamp(1.8rem, 4vw, 2.4rem);
+		font-weight: 800;
+		color: var(--navy-950);
+	}
+
+	.track {
+		height: 14px;
+		overflow: hidden;
+		border-radius: 999px;
+		background: rgb(16 32 90 / 0.08);
+		box-shadow: inset 0 1px 2px rgb(16 32 90 / 0.12);
+	}
+
+	.fill {
+		width: 0;
+		height: 100%;
+		border-radius: inherit;
+		background: linear-gradient(90deg, var(--blue), var(--navy-900) 60%, var(--red));
+		transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.meta {
+		display: flex;
+		justify-content: space-between;
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: var(--navy-900);
+	}
+
+	.btn {
+		justify-self: start;
+	}
+
+	.note {
+		margin: 0;
+		font-size: 0.85rem;
+		color: var(--ink-soft);
+	}
+</style>

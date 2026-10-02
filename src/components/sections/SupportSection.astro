@@ -1,0 +1,46 @@
+---
+import DonationProgress from '../DonationProgress.astro';
+import { support } from '../../data/accueil';
+import { url } from '../../lib/url';
+---
+
+<section id="soutenir" class="section">
+	<div class="container split">
+		<div>
+			<p class="eyebrow">{support.eyebrow}</p>
+			<h2>{support.title}</h2>
+			<p class="lead">{support.text}</p>
+			<div class="links">
+				<a class="btn btn-outline" href={url('/infos/#defiscalisation')}>Défiscalisation des dons</a>
+				<a class="btn btn-outline" href={url('/infos/#faq')}>Questions fréquentes</a>
+			</div>
+		</div>
+		<DonationProgress />
+	</div>
+</section>
+
+<style>
+	.split {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(28px, 5vw, 64px);
+		align-items: center;
+	}
+
+	.lead {
+		margin-top: 16px;
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 24px;
+	}
+
+	@media (max-width: 860px) {
+		.split {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

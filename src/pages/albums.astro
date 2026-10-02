@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Gallery from '../components/Gallery.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { albums } from '../data/albums';
+---
+
+<BaseLayout title="Albums" description="Photos de Chloé Briard et Vincent Noirot en compétition et à l’entraînement.">
+	<PageHeader
+		eyebrow="Albums"
+		title="Au plus près de la course"
+		lead="Plage, départs sprintés, vagues et podiums : la saison en images."
+		image="c4x-france-1.jpg"
+	/>
+
+	<nav class="container album-nav" aria-label="Albums">
+		{albums.map((album) => <a class="btn btn-outline" href={`#${album.id}`}>{album.title}</a>)}
+	</nav>
+
+	{
+		albums.map((album) => (
+			<section id={album.id} class="section album">
+				<div class="container">
+					<div class="album-head">
+						<h2>{album.title}</h2>
+						<p class="lead">{album.description}</p>
+						<span class="tag">{album.photos.length} photos</span>
+					</div>
+					<Gallery photos={album.photos} />
+				</div>
+			</section>
+		))
+	}
+
+	<Lightbox />
+</BaseLayout>
+
+<style>
+	.album-nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 24px;
+	}
+
+	.album {
+		padding-block: 56px 0;
+	}
+
+	.album:last-of-type {
+		padding-bottom: 96px;
+	}
+
+	.album-head {
+		display: grid;
+		gap: 8px;
+		margin-bottom: 28px;
+	}
+
+	.album-head .lead {
+		margin: 0;
+	}
+
+	.album-head .tag {
+		justify-self: start;
+	}
+</style>
