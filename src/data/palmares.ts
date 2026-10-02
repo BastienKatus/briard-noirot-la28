@@ -127,13 +127,22 @@ export const palmares: Record<'chloe' | 'vincent', Result[]> = {
 	vincent: [
 		{
 			year: 2026,
+			competition: 'Championnats de France élite seniors',
+			location: 'Mâcon',
+			event: 'Huit barré (8+), Aviron Club Lyon-Caluire',
+			result: 'Champion de France',
+			level: 'france',
+			medal: 'gold',
+			highlight: true,
+		},
+		{
+			year: 2026,
 			competition: 'Championnats de France de sprint de plage',
 			location: 'La Seyne-sur-Mer',
 			event: 'Double mixte, avec Chloé Briard',
 			result: 'Vice-champion de France',
 			level: 'france',
 			medal: 'silver',
-			highlight: true,
 		},
 		{
 			year: 2026,

@@ -1,30 +1,58 @@
 ---
 import { site } from '../data/site';
 
-const { platformName, platformUrl, projectSlug, goal } = site.donation;
+const { platformName, platformUrl, projectSlug, goal, initialRaised } = site.donation;
 const projectUrl = projectSlug ? new URL(`project/${projectSlug}`, platformUrl).href : '';
 const donateUrl = projectSlug ? `${projectUrl}/donate` : platformUrl;
 const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+const percent = goal ? Math.round((initialRaised / goal) * 100) : 0;
+const live = Boolean(projectSlug) || initialRaised > 0;
 ---
 
-<div class="donation glass" data-donation data-endpoint={projectSlug ? `${projectUrl}.json` : undefined} data-goal={goal}>
+<div
+	class="donation glass"
+	data-donation
+	data-endpoint={projectSlug ? `${projectUrl}.json` : undefined}
+	data-goal={goal}
+	style={`--p: ${Math.min(percent, 100)}`}
+>
 	<div class="top">
-		<p class="status" data-status>
+		<p class="status">
 			<span class="dot" aria-hidden="true"></span>
-			{projectSlug ? 'Collecte en cours' : 'Collecte bientôt en ligne'}
+			{live ? 'Collecte en cours' : 'Collecte bientôt en ligne'}
 		</p>
 		<p class="amount">
-			<strong data-raised>{euro.format(0)}</strong>
+			<strong data-raised>{euro.format(initialRaised)}</strong>
 			<span>collectés sur <span data-goal-label>{euro.format(goal)}</span></span>
 		</p>
 	</div>
 
-	<div class="track" role="progressbar" aria-label="Progression de la collecte" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-track>
-		<div class="fill" data-fill></div>
+	<div
+		class="water"
+		role="progressbar"
+		aria-label="Progression de la collecte"
+		aria-valuemin="0"
+		aria-valuemax="100"
+		aria-valuenow={Math.min(percent, 100)}
+		data-track
+	>
+		<svg class="boat" viewBox="0 0 72 40" aria-hidden="true">
+			<path class="oar" d="M27.5 19 9 35" />
+			<path class="blade" d="M9.5 34.5 4.5 38.5" />
+			<path class="hull" d="M2 29c18 6 48 6 68-2l-1.5-1.5c-18.5 5.5-46.5 5.5-64.5 2Z" />
+			<path class="deck" d="M10 29.4c16 2.9 38 2.9 52-.8" />
+			<path class="legs" d="M38 26 31 21.5 25 26" />
+			<path class="arm" d="M35 16 27.5 19" />
+			<path class="torso" d="M38 26 35 15" />
+			<circle class="head" cx="33.6" cy="10.4" r="3.8" />
+		</svg>
+		<div class="track">
+			<div class="fill"></div>
+		</div>
 	</div>
 
 	<div class="meta">
-		<span data-percent>0 %</span>
+		<span data-percent>{percent} %</span>
 		<span data-donors></span>
 	</div>
 
@@ -54,7 +82,7 @@ const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'
 				box.querySelector('[data-raised]')!.textContent = euro.format(raised);
 				box.querySelector('[data-goal-label]')!.textContent = euro.format(goal);
 				box.querySelector('[data-percent]')!.textContent = `${percent} %`;
-				box.querySelector<HTMLElement>('[data-fill]')!.style.width = `${Math.min(percent, 100)}%`;
+				box.style.setProperty('--p', String(Math.min(percent, 100)));
 				box.querySelector('[data-track]')!.setAttribute('aria-valuenow', String(Math.min(percent, 100)));
 				const donors = Number(project.total_donations);
 				if (donors) box.querySelector('[data-donors]')!.textContent = `${donors} don${donors > 1 ? 's' : ''}`;
@@ -64,11 +92,37 @@ const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'
 </script>
 
 <style>
+	/* Enregistrée pour être animable : sans @property, la jauge et le bateau sautent à leur position sans transition. */
+	@property --p {
+		syntax: '<number>';
+		inherits: true;
+		initial-value: 0;
+	}
+
+	@keyframes launch {
+		from {
+			--p: 0;
+		}
+	}
+
+	@keyframes bob {
+		0%,
+		100% {
+			transform: translateY(0) rotate(0deg);
+		}
+
+		50% {
+			transform: translateY(-1.5px) rotate(-2deg);
+		}
+	}
+
 	.donation {
 		display: grid;
 		gap: 16px;
 		padding: clamp(24px, 4vw, 36px);
 		border-radius: var(--radius-xl);
+		animation: launch 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s backwards;
+		transition: --p 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.top {
@@ -111,6 +165,71 @@ const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'
 		color: var(--navy-950);
 	}
 
+	.water {
+		position: relative;
+		padding-top: 28px;
+	}
+
+	/* Le bateau parcourt la largeur moins la sienne : à 100 % il finit au bout de la jauge sans déborder. */
+	.boat {
+		position: absolute;
+		top: 0;
+		left: calc((100% - 64px) * var(--p) / 100);
+		width: 64px;
+		height: 36px;
+		overflow: visible;
+		animation: bob 2.6s ease-in-out infinite;
+	}
+
+	.hull {
+		fill: var(--navy-900);
+	}
+
+	.oar,
+	.blade,
+	.deck,
+	.legs,
+	.arm,
+	.torso {
+		fill: none;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.oar {
+		stroke: var(--navy-900);
+		stroke-width: 2;
+	}
+
+	.blade {
+		stroke: var(--blue);
+		stroke-width: 5;
+	}
+
+	.deck {
+		stroke: rgb(255 255 255 / 0.55);
+		stroke-width: 0.9;
+	}
+
+	.legs {
+		stroke: var(--navy-950);
+		stroke-width: 3.6;
+	}
+
+	.arm {
+		stroke: var(--navy-950);
+		stroke-width: 2.8;
+	}
+
+	.torso {
+		stroke: var(--red);
+		stroke-width: 5.5;
+	}
+
+	.head {
+		fill: var(--navy-950);
+	}
+
 	.track {
 		height: 14px;
 		overflow: hidden;
@@ -120,11 +239,10 @@ const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'
 	}
 
 	.fill {
-		width: 0;
+		width: calc(var(--p) * 1%);
 		height: 100%;
 		border-radius: inherit;
 		background: linear-gradient(90deg, var(--blue), var(--navy-900) 60%, var(--red));
-		transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.meta {

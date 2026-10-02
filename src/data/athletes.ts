@@ -47,7 +47,7 @@ export const athletes: Athlete[] = [
 		photoPosition: '45% center',
 		bio: [
 			'Toulonnais, Vincent s’est construit à la Société nautique de Monaco, qu’il a représentée aux Mondiaux d’aviron de mer 2018. Il rame depuis 2021 à l’Aviron Club Lyon-Caluire, où il siège aussi au comité directeur.',
-			'Champion de France de solo en mer en 2020, il décroche le bronze mondial en 2024 aux Beach Sprint Finals de Gênes.',
+			'Champion de France de solo en mer en 2020, il décroche le bronze mondial en 2024 aux Beach Sprint Finals de Gênes, puis le titre national en huit avec Lyon-Caluire en 2026.',
 		],
 		aside: {
 			label: 'En une phrase',

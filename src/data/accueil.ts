@@ -2,11 +2,21 @@ export const hero = {
 	eyebrow: 'Équipe de France · Beach sprint',
 	title: 'Cap sur Los Angeles 2028',
 	lead: 'Chloé Briard et Vincent Noirot rament pour décrocher les deux places françaises du beach sprint aux Jeux de Los Angeles, et y courir ensemble le double mixte.',
+	photo: 'duo-en-mer.jpg',
+	// Cadrage sur grand écran : la photo est agrandie (photoScale) puis calée selon photoPosition, pour sortir
+	// les rameurs de la zone du texte et couper le filigrane du bas. Mettre 1 et 'center' pour une photo neutre.
+	photoScale: 1.5,
+	photoPosition: 'left 61%',
 	facts: [
 		{ value: '2', label: 'médailles de bronze mondiales' },
 		{ value: '2026', label: 'vice-champions de France en double mixte' },
-		{ value: '24-25 juil.', label: '2028, Long Beach' },
 	],
+	countdown: {
+		// Premier jour du beach sprint olympique, heure de Long Beach (PDT, UTC-7).
+		target: '2028-07-24T00:00:00-07:00',
+		label: 'avant le beach sprint olympique',
+		date: '24-25 juillet 2028 · Long Beach',
+	},
 };
 
 export const project = {
@@ -16,8 +26,8 @@ export const project = {
 		'Départ en courant sur le sable, slalom en mer entre les bouées, retour sur la plage et sprint jusqu’à la ligne : le beach sprint est une course d’aviron explosive de quelques minutes, au programme olympique pour la première fois à Los Angeles.',
 		'Chaque pays ne peut qualifier qu’une rameuse et un rameur en solo, et ce sont eux qui forment le double mixte olympique. Notre projet : décrocher ces deux places et porter ensemble les couleurs de la France à Long Beach.',
 	],
-	photo: 'duo-en-mer.jpg',
-	photoAlt: 'Double mixte lancé à pleine vitesse dans les vagues',
+	photo: 'double-lever-du-jour.jpg',
+	photoAlt: 'Double en mer calme au lever du jour, reflets sur l’eau',
 	timeline: [
 		{ when: '2026', title: 'Confirmer', text: 'Titres et podiums nationaux, premières victoires sur le circuit international.' },
 		{ when: '2027', title: 'Se qualifier', text: 'Championnats du monde à Oeiras (Portugal), principale épreuve qualificative olympique.' },
