@@ -1,9 +1,8 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// GitHub Pages sert le site sous /briard-noirot-la28/ : tous les liens internes passent par
-// url() (src/lib/url.ts). Avec un domaine personnalisé, remplacer site et supprimer base.
+// Domaine personnalisé déclaré dans Settings → Pages du dépôt : le site est servi à la racine, sans base.
+// Les liens internes passent quand même par url() (src/lib/url.ts), qui suivrait un éventuel retour d'un base.
 export default defineConfig({
-	site: 'https://bastienkatus.github.io',
-	base: '/briard-noirot-la28',
+	site: 'https://briard-noirot-la28.fr',
 });
