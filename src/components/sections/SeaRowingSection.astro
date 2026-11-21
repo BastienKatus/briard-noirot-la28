@@ -1,0 +1,196 @@
+---
+import { seaRowing } from '../../data/accueil';
+
+const [opening, ...paragraphs] = seaRowing.paragraphs;
+const lanes = [120, 290];
+// Échelle du schéma : 1,1 px par mètre depuis le rivage (y = 390), bouées à 85, 170 et 250 m.
+const buoys = [296, 203, 115];
+---
+
+<section id="aviron-de-mer" class="section sea-rowing">
+	<div class="container inner">
+		<div>
+			<p class="eyebrow">{seaRowing.eyebrow}</p>
+			<h2>{seaRowing.title}</h2>
+			<p class="lead">{opening}</p>
+			{paragraphs.map((paragraph) => <p class="text">{paragraph}</p>)}
+			<p class="note">{seaRowing.boats}</p>
+		</div>
+
+		<figure class="diagram glass">
+			<svg viewBox="0 0 420 500" role="img" aria-label="Schéma d’une course de BRS : deux couloirs côte à côte, sprint sur le sable, slalom entre trois bouées sur 250 m, retour en ligne droite">
+				<defs>
+					<marker id="brs-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+						<path d="M0 0 10 5 0 10Z" class="arrow" />
+					</marker>
+				</defs>
+				<rect class="sea" width="420" height="390" />
+				<rect class="sand" y="390" width="420" height="110" />
+				<path class="shore" d="M0 390c35-9 70 9 105 0s70 9 105 0 70 9 105 0 70 9 105 0" />
+				<text class="zone" x="16" y="28">Mer</text>
+				<text class="zone" x="16" y="492">Plage</text>
+				<path class="divider" d="M194 28V384" />
+
+				{
+					lanes.map((x) => (
+						<g>
+							<path
+								class="row"
+								d={`M${x} 334C${x} 318 ${x + 26} 316 ${x + 26} 296C${x + 26} 262 ${x - 26} 240 ${x - 26} 203C${x - 26} 166 ${x + 26} 152 ${x + 26} 115C${x + 26} 76 ${x - 48} 76 ${x - 48} 115V382`}
+								marker-end="url(#brs-arrow)"
+							/>
+							{buoys.map((y) => (
+								<circle class="buoy" cx={x} cy={y} r="8" />
+							))}
+							<path class="boat" d={`M${x} 336c7 10 7 40 0 50-7-10-7-40 0-50Z`} />
+							<path class="run" d={`M${x} 460V398`} marker-end="url(#brs-arrow)" />
+							<path class="run" d={`M${x - 48} 398V460`} marker-end="url(#brs-arrow)" />
+						</g>
+					))
+				}
+
+				<path class="line" d="M50 466h290" />
+				<text class="label" x="195" y="486" text-anchor="middle">Départ et arrivée</text>
+
+				<path class="scale" d="M372 115V390M366 115h12M366 203h12M366 296h12M366 390h12M372 394V466M366 466h12" />
+				<text class="dist strong" x="372" y="102" text-anchor="middle">250 m</text>
+				<text class="dist" x="380" y="163">80 m</text>
+				<text class="dist" x="380" y="254">85 m</text>
+				<text class="dist" x="380" y="347">85 m</text>
+				<text class="dist" x="380" y="426">10 à</text>
+				<text class="dist" x="380" y="440">30 m</text>
+			</svg>
+		</figure>
+	</div>
+</section>
+
+<style>
+	.inner {
+		display: grid;
+		grid-template-columns: 1fr minmax(0, 440px);
+		gap: clamp(28px, 5vw, 64px);
+		align-items: center;
+	}
+
+	.text {
+		color: var(--ink-soft);
+	}
+
+	.note {
+		margin: 0;
+		padding: 12px 16px;
+		border-left: 4px solid var(--red);
+		border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+		background: rgb(255 255 255 / 0.55);
+		color: var(--ink-soft);
+		font-size: 0.95rem;
+	}
+
+	.diagram {
+		margin: 0;
+		padding: clamp(12px, 2vw, 20px);
+		border-radius: var(--radius-xl);
+	}
+
+	svg {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-md);
+	}
+
+	.sea {
+		fill: var(--blue-100);
+	}
+
+	.sand {
+		fill: #f2e4c4;
+	}
+
+	.shore {
+		fill: none;
+		stroke: var(--white);
+		stroke-width: 3;
+	}
+
+	.zone {
+		font-size: 12px;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		fill: var(--ink-soft);
+	}
+
+	.divider {
+		stroke: var(--white);
+		stroke-width: 3;
+		stroke-dasharray: 1 8;
+		stroke-linecap: round;
+	}
+
+	.row,
+	.run {
+		fill: none;
+		stroke-width: 3;
+		stroke-linecap: round;
+	}
+
+	.row {
+		stroke: var(--navy-900);
+	}
+
+	.run {
+		stroke: var(--red);
+		stroke-dasharray: 1 7;
+	}
+
+	.arrow,
+	.boat {
+		fill: var(--navy-900);
+	}
+
+	.buoy {
+		fill: var(--red);
+		stroke: var(--white);
+		stroke-width: 2;
+	}
+
+	.line {
+		stroke: var(--navy-950);
+		stroke-width: 3;
+		stroke-dasharray: 6 4;
+	}
+
+	.label {
+		font-size: 13px;
+		font-weight: 700;
+		fill: var(--navy-950);
+	}
+
+	.scale {
+		fill: none;
+		stroke: var(--navy-950);
+		stroke-width: 1.5;
+	}
+
+	.dist {
+		font-size: 12px;
+		font-weight: 600;
+		fill: var(--navy-950);
+	}
+
+	.strong {
+		font-weight: 800;
+	}
+
+	@media (max-width: 860px) {
+		.inner {
+			grid-template-columns: 1fr;
+		}
+
+		.diagram {
+			justify-self: center;
+			width: min(100%, 440px);
+		}
+	}
+</style>

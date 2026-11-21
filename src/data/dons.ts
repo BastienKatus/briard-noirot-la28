@@ -1,6 +1,6 @@
-// Règles vérifiées le 2 octobre 2026 : CGU de soutienstonsportif.fr, service-public.gouv.fr (F426, F22263), BOFiP.
-// Plafond de contrepartie corrigé le 21 novembre 2026 d'après F426 et BOFiP (BOI-IR-RICI-250-20 §90).
-// À revérifier à chaque loi de finances.
+// Informations volontairement générales : le détail des règles relève de Soutiens ton Sportif (collecte) et de
+// service-public.gouv.fr (réduction d'impôt), vers lesquels la page Dons & infos renvoie. Taux vérifiés le
+// 21 novembre 2026 (F426, F22263), à revérifier à chaque loi de finances.
 
 export const steps = [
 	{
@@ -9,11 +9,11 @@ export const steps = [
 	},
 	{
 		title: 'Donnez en quelques clics',
-		text: 'Paiement par carte bancaire sécurisé (3D Secure), de 15 € à 9 900 € par don.',
+		text: 'Paiement sécurisé par carte bancaire, directement sur la plateforme.',
 	},
 	{
 		title: 'Recevez votre reçu fiscal',
-		text: 'La Fondation vous envoie automatiquement un reçu fiscal (CERFA) par e-mail.',
+		text: 'La Fondation du Sport Français vous envoie un reçu fiscal par e-mail.',
 	},
 ];
 
@@ -22,11 +22,6 @@ export const taxCards = [
 		audience: 'Particuliers',
 		rate: '66 %',
 		summary: 'de réduction d’impôt sur le revenu',
-		rules: [
-			'Dans la limite de 20 % de votre revenu imposable.',
-			'L’excédent est reporté sur les 5 années suivantes.',
-			'Article 200 du Code général des impôts.',
-		],
 		examples: [
 			{ gift: 50, cost: 17 },
 			{ gift: 100, cost: 34 },
@@ -38,11 +33,6 @@ export const taxCards = [
 		audience: 'Entreprises',
 		rate: '60 %',
 		summary: 'de réduction d’impôt (IS ou IR)',
-		rules: [
-			'Dans la limite de 20 000 € ou de 0,5 % du chiffre d’affaires HT (le plus élevé des deux).',
-			'L’excédent est reporté sur les 5 exercices suivants.',
-			'Au-delà de 3 000 €, le don passe par une convention de mécénat avec la Fondation : contactez-nous.',
-		],
 		examples: [
 			{ gift: 1000, cost: 400 },
 			{ gift: 3000, cost: 1200 },
@@ -57,7 +47,7 @@ export const comparison = {
 		{ label: 'Principe', values: ['Un soutien sans contrepartie équivalente', 'Une prestation de visibilité achetée'] },
 		{
 			label: 'Contreparties',
-			values: ['Symboliques (citation du nom ou du logo), au plus 25 % du don', 'Visibilité publicitaire : tenues, bateau, réseaux, événements'],
+			values: ['Symboliques (citation du nom ou du logo)', 'Visibilité publicitaire : tenues, bateau, réseaux, événements'],
 		},
 		{ label: 'Fiscalité', values: ['Réduction d’impôt de 60 %', 'Charge déductible du résultat, facturée avec TVA'] },
 		{ label: 'Formalités', values: ['Reçu fiscal émis par la Fondation du Sport Français', 'Contrat et facture entre l’entreprise et les athlètes'] },
@@ -73,29 +63,19 @@ export const faq = [
 	{
 		question: 'Où va mon argent ?',
 		answer:
-			'La Fondation du Sport Français collecte les dons pour notre compte et nous les reverse chaque mois. Elle retient 10 % de chaque don pour le fonctionnement de la plateforme, frais bancaires compris.',
+			'La Fondation du Sport Français collecte les dons pour notre compte et nous les reverse. Ses conditions de collecte sont détaillées sur Soutiens ton Sportif.',
 	},
 	{
-		question: 'Ma famille peut-elle donner ?',
+		question: 'Mes proches peuvent-ils donner ?',
 		answer:
-			'Non, pas via la plateforme : les règles de la Fondation excluent les dons des membres de notre famille et de notre foyer fiscal. Vos encouragements restent les bienvenus !',
+			'Certains dons ne sont pas acceptés, notamment au sein d’un même foyer fiscal : les conditions sont précisées sur Soutiens ton Sportif. Vos encouragements restent les bienvenus !',
 	},
 	{
-		question: 'Puis-je donner plus de 3 000 € ?',
-		answer:
-			'Oui, mais au-delà de 3 000 € le don fait l’objet d’une convention de mécénat signée avec la Fondation, hors plateforme. Écrivez-nous et nous vous mettrons en relation.',
-	},
-	{
-		question: 'Que se passe-t-il si l’objectif n’est pas atteint ?',
-		answer: 'Rien de particulier : chaque don nous est reversé au fil de la collecte, quel que soit le montant final.',
-	},
-	{
-		question: 'Mon don est-il remboursable ?',
-		answer: 'Non, un don est irrévocable. En cas de besoin, il peut être réaffecté au fonds de solidarité de la Fondation.',
+		question: 'Puis-je faire un don important ou au nom de mon entreprise ?',
+		answer: 'Oui : écrivez-nous et nous vous mettrons en relation avec la Fondation du Sport Français.',
 	},
 	{
 		question: 'Puis-je recevoir une contrepartie ?',
-		answer:
-			'Une attention symbolique, oui : la loi limite la contrepartie à 25 % du don, et à 65 € par an au plus pour un particulier, faute de quoi la réduction d’impôt est perdue.',
+		answer: 'Une attention symbolique, oui, dans les limites fixées par la loi pour conserver la réduction d’impôt.',
 	},
 ];

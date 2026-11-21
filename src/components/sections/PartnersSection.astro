@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { partners } from '../../data/accueil';
+import { site } from '../../data/site';
+import { photo } from '../../lib/photos';
 ---
 
 <section id="partenaires" class="section partners">
@@ -7,7 +10,14 @@ import { partners } from '../../data/accueil';
 		<p class="eyebrow">{partners.eyebrow}</p>
 		<h2>{partners.title}</h2>
 		<ul class="list">
-			{partners.list.map((partner) => <li class="glass">{partner}</li>)}
+			{
+				site.supporters.map((partner) => (
+					<li class="glass">
+						{partner.logo && <Image class="logo" src={photo(partner.logo)} alt="" widths={[240, 480]} sizes="240px" />}
+						<span class:list={['name', { solo: !partner.logo }]}>{partner.name}</span>
+					</li>
+				))
+			}
 		</ul>
 	</div>
 </section>
@@ -28,14 +38,34 @@ import { partners } from '../../data/accueil';
 
 	.list li {
 		display: grid;
+		gap: 14px;
 		place-items: center;
-		min-height: 112px;
-		padding: 20px 24px;
+		align-content: center;
+		min-height: 168px;
+		padding: 24px;
 		border-radius: var(--radius-md);
+		text-align: center;
+	}
+
+	/* multiply efface le fond blanc opaque du logo Swift Racing (JPG) sur le verre clair des cartes. */
+	.list :global(.logo) {
+		width: auto;
+		max-width: 80%;
+		height: auto;
+		max-height: 104px;
+		mix-blend-mode: multiply;
+	}
+
+	.name {
+		color: var(--ink-soft);
+		font-size: 0.85rem;
+		font-weight: 700;
+	}
+
+	.solo {
 		color: var(--navy-950);
 		font-size: 1.1rem;
 		font-weight: 800;
-		text-align: center;
 	}
 
 	@media (max-width: 720px) {

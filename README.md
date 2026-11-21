@@ -1,6 +1,6 @@
 # briard-noirot-la28
 
-Site vitrine de Chloé Briard et Vincent Noirot (équipe de France de beach rowing sprint) : présentation des rameurs, palmarès, albums photo et appel aux dons pour l’objectif Los Angeles 2028. Les dons passent par la plateforme [Soutiens ton Sportif](https://www.soutienstonsportif.fr/) de la Fondation du Sport Français : le site ne traite aucun paiement.
+Site vitrine de Chloé Briard et Vincent Noirot (équipe de France de beach rowing sprint, BRS) : présentation des rameurs, palmarès, albums photo et appel aux dons pour l’objectif Los Angeles 2028. Les dons passent par la plateforme [Soutiens ton Sportif](https://www.soutienstonsportif.fr/) de la Fondation du Sport Français : le site ne traite aucun paiement.
 
 Construit avec [Astro](https://docs.astro.build) : le build produit du HTML/CSS statique dans `dist/`, sans cookie ni traceur.
 
@@ -24,7 +24,7 @@ Tous les textes sont dans `src/data/`, séparés de la mise en page :
 
 | Fichier                               | Contenu                                                                 |
 | ------------------------------------- | ----------------------------------------------------------------------- |
-| `site.ts`                             | Nom du site, **e-mail de contact**, menu, réglages des cagnottes        |
+| `site.ts`                             | Nom du site, **e-mail de contact**, menu, partenaires (accueil et pied de page), réglages des cagnottes |
 | `accueil.ts`                          | Accueil : bandeau, présentation commune, projet, frise vers LA 2028, besoins, bloc « soutenir », partenaires |
 | `athletes.ts`                         | Présentations, photos et encadrés des deux rameurs                      |
 | `palmares.ts`                         | Résumés, résultats (`highlight: true` = affiché sur l’accueil), résultats en duo |
@@ -51,8 +51,7 @@ Avec un domaine personnalisé : remplacer `site` par ce domaine et supprimer `ba
 - [ ] Coordonnées de l’éditeur dans les mentions légales
 - [ ] Crédits photos, et accord des photographes (FFAviron / Magaviron, World Rowing…)
 - [ ] Relecture des biographies, du palmarès et de l’objectif LA 2028 par les athlètes
-- [ ] Slugs des cagnottes Soutiens ton Sportif de Chloé et de Vincent, objectif de collecte (plafonné à 20 000 € par la plateforme)
-- [ ] Logos des partenaires (Swift Racing, Ville de Caluire, Aviron Club de Lyon Caluire)
+- [ ] Slug de la cagnotte Soutiens ton Sportif de Vincent (celle de Chloé est en place)
 
 ## Structure
 
@@ -61,6 +60,7 @@ Avec un domaine personnalisé : remplacer `site` par ce domaine et supprimer `ba
 public/              Fichiers servis tels quels (favicon)
 src/
 ├── assets/photos/   Photos (optimisées au build)
+├── assets/logos/    Logos des partenaires (optimisés au build)
 ├── components/      Blocs réutilisables (en-tête, galerie, jauge, contact…)
 │   └── sections/    Sections de la page d’accueil
 ├── data/            Tous les contenus éditables
