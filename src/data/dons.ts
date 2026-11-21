@@ -1,4 +1,5 @@
 // Règles vérifiées le 2 octobre 2026 : CGU de soutienstonsportif.fr, service-public.gouv.fr (F426, F22263), BOFiP.
+// Plafond de contrepartie corrigé le 21 novembre 2026 d'après F426 et BOFiP (BOI-IR-RICI-250-20 §90).
 // À revérifier à chaque loi de finances.
 
 export const steps = [
@@ -67,7 +68,7 @@ export const faq = [
 	{
 		question: 'Pourquoi deux cagnottes ?',
 		answer:
-			'Il n’est pas possible d’ouvrir une cagnotte commune : chacun de nous a donc la sienne. Vous pouvez soutenir l’un, l’autre ou les deux.',
+			'Sur Soutiens ton Sportif, chaque cagnotte est ouverte au nom d’un seul athlète, qui en est le bénéficiaire : il n’est donc pas possible d’ouvrir une cagnotte commune. Chacun de nous a la sienne, et vous pouvez soutenir l’un, l’autre ou les deux.',
 	},
 	{
 		question: 'Où va mon argent ?',
@@ -95,6 +96,6 @@ export const faq = [
 	{
 		question: 'Puis-je recevoir une contrepartie ?',
 		answer:
-			'Une attention symbolique, oui : la loi limite la contrepartie à 25 % du don, et à 73 € au plus pour un particulier, faute de quoi la réduction d’impôt est perdue.',
+			'Une attention symbolique, oui : la loi limite la contrepartie à 25 % du don, et à 65 € par an au plus pour un particulier, faute de quoi la réduction d’impôt est perdue.',
 	},
 ];
