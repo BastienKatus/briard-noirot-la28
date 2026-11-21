@@ -1,7 +1,7 @@
 export const hero = {
-	eyebrow: 'Équipe de France · Beach rowing sprint',
+	eyebrow: 'Équipe de France · Beach rowing sprint (BRS)',
 	title: 'Cap sur Los Angeles 2028',
-	lead: 'Chloé Briard et Vincent Noirot rament pour décrocher les deux places françaises du beach rowing sprint aux Jeux de Los Angeles, et y courir ensemble le double mixte.',
+	lead: 'Chloé Briard et Vincent Noirot rament pour décrocher les deux places françaises du BRS aux Jeux de Los Angeles, et y courir ensemble le double mixte.',
 	photo: 'duo-en-mer.jpg',
 	// Cadrage sur grand écran : la photo est agrandie (photoScale) puis calée selon photoPosition, pour sortir
 	// les rameurs de la zone du texte et couper le filigrane du bas. Mettre 1 et 'center' pour une photo neutre.
@@ -12,9 +12,9 @@ export const hero = {
 		{ value: '2026', label: 'vice-champions de France en double mixte' },
 	],
 	countdown: {
-		// Premier jour du beach rowing sprint olympique, heure de Long Beach (PDT, UTC-7).
+		// Premier jour du BRS olympique, heure de Long Beach (PDT, UTC-7).
 		target: '2028-07-24T00:00:00-07:00',
-		label: 'avant le beach rowing sprint olympique',
+		label: 'avant le BRS olympique',
 		date: '24-25 juillet 2028 · Long Beach',
 	},
 };
@@ -35,11 +35,21 @@ export const story = {
 
 export const project = {
 	eyebrow: 'Le projet',
-	title: 'Le beach rowing sprint entre aux Jeux',
+	title: 'Le BRS entre aux Jeux',
 	paragraphs: [
-		'Départ en courant sur le sable, slalom en mer entre les bouées, retour sur la plage et sprint jusqu’à la ligne : le beach rowing sprint est une course d’aviron explosive de quelques minutes, au programme olympique pour la première fois à Los Angeles.',
-		'Chaque pays ne peut qualifier qu’une rameuse et un rameur en solo, et ce sont eux qui forment le double mixte olympique. Notre projet : décrocher ces deux places et porter ensemble les couleurs de la France à Long Beach.',
+		'Départ en courant sur le sable, slalom en mer entre les bouées, retour sur la plage et sprint jusqu’à la ligne : le BRS est une course d’aviron explosive de quelques minutes, au programme olympique pour la première fois à Los Angeles.',
+		'Chaque pays ne peut qualifier qu’une rameuse et un rameur en solo, et ce sont eux qui forment le double mixte olympique. Notre projet : décrocher ces deux places et porter ensemble les couleurs de la France à Long Beach à Los Angeles.',
 	],
+	race: {
+		title: 'Le déroulé d’une course',
+		steps: [
+			'Départ en courant sur le sable jusqu’au bateau.',
+			'Embarquement et départ en mer.',
+			'Slalom entre les bouées.',
+			'Virage, puis retour vers la plage.',
+			'Sortie du bateau et sprint sur le sable jusqu’à la ligne d’arrivée.',
+		],
+	},
 	photo: 'double-lever-du-jour.jpg',
 	photoAlt: 'Double en mer calme au lever du jour, reflets sur l’eau',
 	timeline: [
@@ -47,12 +57,12 @@ export const project = {
 		{
 			when: '2027',
 			title: 'Se qualifier',
-			text: 'Jeux européens en Turquie (juin) et championnats du monde à Oeiras (Portugal) : les épreuves qualificatives olympiques.',
+			text: 'Juin : Jeux européens en Turquie, première épreuve de qualification. Octobre : championnats du monde à Oeiras (Portugal), deuxième épreuve de qualification olympique.',
 		},
 		{ when: '2028', title: 'Los Angeles', text: 'Aucune épreuve qualificative : place aux Jeux, les 24 et 25 juillet à Long Beach.' },
 	],
 	needs: [
-		{ title: 'Matériel', text: 'Bateaux d’aviron de mer, rames et équipement.' },
+		{ title: 'Matériel', text: 'Bateaux d’aviron de mer, rames et équipement adaptés à la mer.' },
 		{ title: 'Compétitions', text: 'Déplacements et inscriptions sur le circuit international.' },
 		{ title: 'Préparation', text: 'Stages, préparation physique et récupération.' },
 		{ title: 'Accompagnement', text: 'Suivi médical, kinésithérapie et nutrition.' },

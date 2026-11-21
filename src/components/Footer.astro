@@ -9,12 +9,18 @@ const year = new Date().getFullYear();
 	<div class="container inner glass">
 		<div class="about">
 			<p class="name">{site.name}</p>
-			<p class="small">Beach rowing sprint · Équipe de France d’aviron · Objectif Los Angeles 2028</p>
+			<p class="small">Beach rowing sprint (BRS) · Équipe de France d’aviron · Objectif Los Angeles 2028</p>
 		</div>
 		<nav class="links" aria-label="Pied de page">
 			{site.nav.map((item) => <a href={url(item.href)}>{item.label}</a>)}
 			<a href={url('/infos/#mentions-legales')}>Mentions légales</a>
 		</nav>
+		<div class="supporters">
+			<p class="supporters-title">Ils nous accompagnent</p>
+			<ul>
+				{site.supporters.map((supporter) => <li>{supporter}</li>)}
+			</ul>
+		</div>
 		<p class="small copyright">
 			© {year} {site.name} · Dons collectés par la Fondation du Sport Français via{' '}
 			<a href={site.donation.platformUrl} target="_blank" rel="noopener">{site.donation.platformName}</a>
@@ -62,6 +68,45 @@ const year = new Date().getFullYear();
 
 	.links a:hover {
 		color: var(--blue);
+	}
+
+	.supporters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px 20px;
+		align-items: center;
+		grid-column: 1 / -1;
+		padding: 14px 20px;
+		border: 1px solid rgb(16 32 90 / 0.08);
+		border-radius: var(--radius-md);
+		background: rgb(255 255 255 / 0.55);
+	}
+
+	.supporters-title {
+		margin: 0;
+		font-size: 0.75rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--red);
+	}
+
+	.supporters ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.supporters li {
+		padding: 4px 12px;
+		border-radius: 999px;
+		background: var(--blue-100);
+		color: var(--navy-900);
+		font-size: 0.88rem;
+		font-weight: 700;
 	}
 
 	.copyright {

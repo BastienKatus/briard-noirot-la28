@@ -1,8 +1,8 @@
 export const site = {
 	name: 'Chloé Briard & Vincent Noirot',
-	shortName: 'Chloé et Vincent',
+	shortName: 'Briard · Noirot',
 	description:
-		'Chloé Briard et Vincent Noirot, rameurs de l’équipe de France de beach rowing sprint, visent les Jeux olympiques de Los Angeles 2028. Soutenez leur projet.',
+		'Chloé Briard et Vincent Noirot, rameurs de l’équipe de France de beach rowing sprint (BRS), visent les Jeux olympiques de Los Angeles 2028. Soutenez leur projet.',
 
 	// À remplacer par la vraie adresse avant la mise en ligne : le formulaire de contact écrit à cette adresse.
 	contactEmail: 'contact@example.com',
@@ -14,6 +14,9 @@ export const site = {
 		{ label: 'Dons & infos', href: '/infos/' },
 	],
 
+	// Encadré « Ils nous accompagnent » du pied de page : sponsors et personnes, sans logo.
+	supporters: ['Swift Racing', 'Aviron Club de Lyon Caluire'],
+
 	donation: {
 		platformName: 'Soutiens ton Sportif',
 		platformUrl: 'https://www.soutienstonsportif.fr/',
@@ -24,7 +27,7 @@ export const site = {
 		// la jauge affiche alors « collecte bientôt en ligne ».
 		// initialRaised = montant affiché tant que la jauge ne lit pas la plateforme (slug vide ou plateforme injoignable).
 		projects: [
-			{ athlete: 'Chloé', projectSlug: '', initialRaised: 0 },
+			{ athlete: 'Chloé', projectSlug: 'chloe-briard-aviron-beach-rowing-sprint', initialRaised: 0 },
 			{ athlete: 'Vincent', projectSlug: '', initialRaised: 0 },
 		],
 	},

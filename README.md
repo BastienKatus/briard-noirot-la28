@@ -1,6 +1,6 @@
 # briard-noirot-la28
 
-Site vitrine de Chloé Briard et Vincent Noirot (équipe de France de beach rowing sprint) : présentation des rameurs, palmarès, albums photo et appel aux dons pour l’objectif Los Angeles 2028. Les dons passent par la plateforme [Soutiens ton Sportif](https://www.soutienstonsportif.fr/) de la Fondation du Sport Français : le site ne traite aucun paiement.
+Site vitrine de Chloé Briard et Vincent Noirot (équipe de France de beach rowing sprint, BRS) : présentation des rameurs, palmarès, albums photo et appel aux dons pour l’objectif Los Angeles 2028. Les dons passent par la plateforme [Soutiens ton Sportif](https://www.soutienstonsportif.fr/) de la Fondation du Sport Français : le site ne traite aucun paiement.
 
 Construit avec [Astro](https://docs.astro.build) : le build produit du HTML/CSS statique dans `dist/`, sans cookie ni traceur.
 
@@ -51,7 +51,7 @@ Avec un domaine personnalisé : remplacer `site` par ce domaine et supprimer `ba
 - [ ] Coordonnées de l’éditeur dans les mentions légales
 - [ ] Crédits photos, et accord des photographes (FFAviron / Magaviron, World Rowing…)
 - [ ] Relecture des biographies, du palmarès et de l’objectif LA 2028 par les athlètes
-- [ ] Slugs des cagnottes Soutiens ton Sportif de Chloé et de Vincent, objectif de collecte (plafonné à 20 000 € par la plateforme)
+- [ ] Slug de la cagnotte Soutiens ton Sportif de Vincent (celle de Chloé est en place)
 - [ ] Logos des partenaires (Swift Racing, Ville de Caluire, Aviron Club de Lyon Caluire)
 
 ## Structure
