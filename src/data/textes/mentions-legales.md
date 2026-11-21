@@ -22,7 +22,7 @@ Les dons sont collectés par la Fondation du Sport Français, reconnue d’utili
 
 - **Aucun cookie ni traceur** n’est déposé par ce site : aucun bandeau de consentement n’est donc nécessaire.
 - **Hébergement** : GitHub enregistre l’adresse IP des visiteurs à des fins de sécurité.
-- **Jauge de collecte** : pour afficher le montant collecté, votre navigateur interroge directement soutienstonsportif.fr.
+- **Jauges de collecte** : pour afficher les montants collectés, votre navigateur interroge directement soutienstonsportif.fr.
 - **Messages** : le formulaire de contact ouvre votre propre messagerie ; rien n’est enregistré par le site. Les e-mails que vous nous envoyez sont utilisés uniquement pour vous répondre et conservés le temps de nos échanges.
 
 Vous pouvez demander l’accès, la rectification ou la suppression de vos données en nous écrivant, et introduire une réclamation auprès de la [CNIL](https://www.cnil.fr/).

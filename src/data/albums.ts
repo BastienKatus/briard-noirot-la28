@@ -56,6 +56,13 @@ export const albums: Album[] = [
 			{ file: 'course-plage.jpg', alt: 'Course sur la plage au pied d’une digue' },
 			{ file: 'c4x-france-2.jpg', alt: 'Quatre de couple barré français, drapeaux tricolores à l’arrière' },
 			{ file: 'equipe-france-dans-l-eau.jpg', alt: 'Cinq rameurs de l’équipe de France posent dans l’eau' },
+			{ file: 'solo-mer-calme.jpg', alt: 'Rameur en solo sur une mer d’huile, pelle aux couleurs de la France' },
+			{ file: 'sortie-bateau-plage.jpg', alt: 'Rameur de l’équipe de France bondit de son bateau vers la plage' },
+			{ file: 'solo-contre-jour.jpg', alt: 'Silhouette d’un rameur en solo à contre-jour, soleil bas sur la mer' },
+			{ file: 'portage-bateau-plage.jpg', alt: 'Rameur de l’équipe de France porte l’avant de son bateau au bord de l’eau' },
+			{ file: 'solo-bord-de-plage.jpg', alt: 'Rameur de l’équipe de France assis dans son solo au bord de l’eau' },
+			{ file: 'portrait-casquette-swift.jpg', alt: 'Portrait d’un rameur en casquette Swift Racing et lunettes de soleil' },
+			{ file: 'casquette-swift-racing.jpg', alt: 'Casquette Swift Racing vue de dos' },
 		],
 	},
 	{
@@ -68,6 +75,17 @@ export const albums: Album[] = [
 			{ file: 'podium-international.jpg', alt: 'Podium international avec les drapeaux français, italien et britannique' },
 			{ file: 'podium-france-hommes.jpg', alt: 'Podium masculin avec le fanion de la Fédération française d’aviron', caption: 'Championnats de France 2026' },
 			{ file: 'coastal-podium.jpg', alt: 'Podium des Coastal Championships avec les équipes médaillées', caption: 'Coastal Championships' },
+			{
+				file: 'mondiaux-mer-2023-podium.jpg',
+				alt: 'Podium du double mixte aux championnats du monde d’aviron de mer : Vincent Noirot et sa coéquipière, médaillés d’argent, à gauche',
+				caption: 'Mondiaux d’aviron de mer 2023, Barletta',
+			},
+			{
+				file: 'heraklion-2023-podium.jpg',
+				alt: 'Vincent Noirot, médaille de bronze, sur le podium du solo homme des Jeux méditerranéens de plage',
+				caption: 'Jeux méditerranéens de plage 2023, Heraklion',
+			},
+			{ file: 'accolade-equipe-france.jpg', alt: 'Accolade entre deux rameurs de l’équipe de France après une course World Rowing' },
 		],
 	},
 ];

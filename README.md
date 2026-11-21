@@ -1,6 +1,6 @@
 # briard-noirot-la28
 
-Site vitrine de Chloé Briard et Vincent Noirot (équipe de France de beach sprint) : présentation des rameurs, palmarès, albums photo et appel aux dons pour l’objectif Los Angeles 2028. Les dons passent par la plateforme [Soutiens ton Sportif](https://www.soutienstonsportif.fr/) de la Fondation du Sport Français : le site ne traite aucun paiement.
+Site vitrine de Chloé Briard et Vincent Noirot (équipe de France de beach rowing sprint) : présentation des rameurs, palmarès, albums photo et appel aux dons pour l’objectif Los Angeles 2028. Les dons passent par la plateforme [Soutiens ton Sportif](https://www.soutienstonsportif.fr/) de la Fondation du Sport Français : le site ne traite aucun paiement.
 
 Construit avec [Astro](https://docs.astro.build) : le build produit du HTML/CSS statique dans `dist/`, sans cookie ni traceur.
 
@@ -24,10 +24,10 @@ Tous les textes sont dans `src/data/`, séparés de la mise en page :
 
 | Fichier                               | Contenu                                                                 |
 | ------------------------------------- | ----------------------------------------------------------------------- |
-| `site.ts`                             | Nom du site, **e-mail de contact**, menu, réglages de la collecte       |
-| `accueil.ts`                          | Accueil : bandeau, projet, frise vers LA 2028, besoins, bloc « soutenir » |
-| `athletes.ts`                         | Biographies, photos et encadrés des deux rameurs                        |
-| `palmares.ts`                         | Résultats (`highlight: true` = affiché sur l’accueil), résultats en duo |
+| `site.ts`                             | Nom du site, **e-mail de contact**, menu, réglages des cagnottes        |
+| `accueil.ts`                          | Accueil : bandeau, présentation commune, projet, frise vers LA 2028, besoins, bloc « soutenir », partenaires |
+| `athletes.ts`                         | Présentations, photos et encadrés des deux rameurs                      |
+| `palmares.ts`                         | Résumés, résultats (`highlight: true` = affiché sur l’accueil), résultats en duo |
 | `albums.ts`                           | Albums photo : ordre, textes alternatifs, légendes                      |
 | `dons.ts`                             | Étapes du don, défiscalisation, mécénat/sponsoring, FAQ                 |
 | `textes/mentions-legales.md`          | Mentions légales et données personnelles (Markdown)                     |
@@ -36,7 +36,7 @@ Tous les textes sont dans `src/data/`, séparés de la mise en page :
 
 **Ajouter une photo** : la déposer dans `src/assets/photos/`, puis la référencer par son nom de fichier (dans `albums.ts` par exemple). Astro génère automatiquement des versions WebP redimensionnées. Un nom de fichier inconnu fait échouer le build : une faute de frappe ne peut pas partir en ligne.
 
-**Activer la jauge de collecte** : quand la page Soutiens ton Sportif existe, renseigner son slug dans `site.ts` (`donation.projectSlug`, la fin de l’URL `soutienstonsportif.fr/project/<slug>`). La jauge lit alors le montant collecté en direct ; si la plateforme ne répond pas, elle reste à son état initial et le bouton de don fonctionne toujours.
+**Activer une jauge de collecte** : Chloé et Vincent ont chacun leur cagnotte (la plateforme n’accepte pas de cagnotte commune). Quand la page Soutiens ton Sportif d’un athlète existe, renseigner son slug dans `site.ts` (`projectSlug` de son entrée dans `donation.projects`, la fin de l’URL `soutienstonsportif.fr/project/<slug>`). Sa jauge lit alors le montant collecté en direct ; si la plateforme ne répond pas, elle reste à son état initial et le bouton de don fonctionne toujours.
 
 ## Déploiement (GitHub Pages)
 
@@ -51,7 +51,8 @@ Avec un domaine personnalisé : remplacer `site` par ce domaine et supprimer `ba
 - [ ] Coordonnées de l’éditeur dans les mentions légales
 - [ ] Crédits photos, et accord des photographes (FFAviron / Magaviron, World Rowing…)
 - [ ] Relecture des biographies, du palmarès et de l’objectif LA 2028 par les athlètes
-- [ ] Slug de la page Soutiens ton Sportif, objectif de collecte (plafonné à 20 000 € par la plateforme)
+- [ ] Slugs des cagnottes Soutiens ton Sportif de Chloé et de Vincent, objectif de collecte (plafonné à 20 000 € par la plateforme)
+- [ ] Logos des partenaires (Swift Racing, Ville de Caluire, Aviron Club de Lyon Caluire)
 
 ## Structure
 

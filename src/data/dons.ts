@@ -3,8 +3,8 @@
 
 export const steps = [
 	{
-		title: 'Rendez-vous sur notre page',
-		text: 'Notre collecte est hébergée par Soutiens ton Sportif, la plateforme de la Fondation du Sport Français.',
+		title: 'Choisissez votre cagnotte',
+		text: 'Chloé et Vincent ont chacun leur cagnotte sur Soutiens ton Sportif, la plateforme de la Fondation du Sport Français.',
 	},
 	{
 		title: 'Donnez en quelques clics',
@@ -64,6 +64,11 @@ export const comparison = {
 };
 
 export const faq = [
+	{
+		question: 'Pourquoi deux cagnottes ?',
+		answer:
+			'Il n’est pas possible d’ouvrir une cagnotte commune : chacun de nous a donc la sienne. Vous pouvez soutenir l’un, l’autre ou les deux.',
+	},
 	{
 		question: 'Où va mon argent ?',
 		answer:

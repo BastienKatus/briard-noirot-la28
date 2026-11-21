@@ -1,64 +1,84 @@
 ---
 import { site } from '../data/site';
 
-const { platformName, platformUrl, projectSlug, goal, initialRaised } = site.donation;
-const projectUrl = projectSlug ? new URL(`project/${projectSlug}`, platformUrl).href : '';
-const donateUrl = projectSlug ? `${projectUrl}/donate` : platformUrl;
+const { platformName, platformUrl, goal, projects } = site.donation;
 const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
-const percent = goal ? Math.round((initialRaised / goal) * 100) : 0;
-const live = Boolean(projectSlug) || initialRaised > 0;
+const cagnottes = projects.map(({ athlete, projectSlug, initialRaised }) => {
+	const projectUrl = projectSlug ? new URL(`project/${projectSlug}`, platformUrl).href : '';
+	const percent = goal ? Math.round((initialRaised / goal) * 100) : 0;
+	return {
+		athlete,
+		projectSlug,
+		initialRaised,
+		percent: Math.min(percent, 100),
+		endpoint: projectSlug ? `${projectUrl}.json` : undefined,
+		donateUrl: projectSlug ? `${projectUrl}/donate` : platformUrl,
+		live: Boolean(projectSlug) || initialRaised > 0,
+	};
+});
 ---
 
-<div
-	class="donation glass"
-	data-donation
-	data-endpoint={projectSlug ? `${projectUrl}.json` : undefined}
-	data-goal={goal}
-	style={`--p: ${Math.min(percent, 100)}`}
->
-	<div class="top">
-		<p class="status">
-			<span class="dot" aria-hidden="true"></span>
-			{live ? 'Collecte en cours' : 'Collecte bientôt en ligne'}
-		</p>
-		<p class="amount">
-			<strong data-raised>{euro.format(initialRaised)}</strong>
-			<span>collectés sur <span data-goal-label>{euro.format(goal)}</span></span>
-		</p>
-	</div>
+<div class="cagnottes">
+	{
+		cagnottes.map((cagnotte) => (
+			<div
+				class="donation glass"
+				data-donation
+				data-endpoint={cagnotte.endpoint}
+				data-goal={goal}
+				style={`--p: ${cagnotte.percent}`}
+			>
+				<div class="top">
+					<div>
+						<p class="status">
+							<span class="dot" aria-hidden="true" />
+							{cagnotte.live ? 'Collecte en cours' : 'Collecte bientôt en ligne'}
+						</p>
+						<h3>Cagnotte de {cagnotte.athlete}</h3>
+					</div>
+					<p class="amount">
+						<strong data-raised>{euro.format(cagnotte.initialRaised)}</strong>
+						<span>
+							collectés sur <span data-goal-label>{euro.format(goal)}</span>
+						</span>
+					</p>
+				</div>
 
-	<div
-		class="water"
-		role="progressbar"
-		aria-label="Progression de la collecte"
-		aria-valuemin="0"
-		aria-valuemax="100"
-		aria-valuenow={Math.min(percent, 100)}
-		data-track
-	>
-		<svg class="boat" viewBox="0 0 72 40" aria-hidden="true">
-			<path class="oar" d="M27.5 19 9 35" />
-			<path class="blade" d="M9.5 34.5 4.5 38.5" />
-			<path class="hull" d="M2 29c18 6 48 6 68-2l-1.5-1.5c-18.5 5.5-46.5 5.5-64.5 2Z" />
-			<path class="deck" d="M10 29.4c16 2.9 38 2.9 52-.8" />
-			<path class="legs" d="M38 26 31 21.5 25 26" />
-			<path class="arm" d="M35 16 27.5 19" />
-			<path class="torso" d="M38 26 35 15" />
-			<circle class="head" cx="33.6" cy="10.4" r="3.8" />
-		</svg>
-		<div class="track">
-			<div class="fill"></div>
-		</div>
-	</div>
+				<div
+					class="water"
+					role="progressbar"
+					aria-label={`Progression de la cagnotte de ${cagnotte.athlete}`}
+					aria-valuemin="0"
+					aria-valuemax="100"
+					aria-valuenow={cagnotte.percent}
+					data-track
+				>
+					<svg class="boat" viewBox="0 0 72 40" aria-hidden="true">
+						<path class="oar" d="M27.5 19 9 35" />
+						<path class="blade" d="M9.5 34.5 4.5 38.5" />
+						<path class="hull" d="M2 29c18 6 48 6 68-2l-1.5-1.5c-18.5 5.5-46.5 5.5-64.5 2Z" />
+						<path class="deck" d="M10 29.4c16 2.9 38 2.9 52-.8" />
+						<path class="legs" d="M38 26 31 21.5 25 26" />
+						<path class="arm" d="M35 16 27.5 19" />
+						<path class="torso" d="M38 26 35 15" />
+						<circle class="head" cx="33.6" cy="10.4" r="3.8" />
+					</svg>
+					<div class="track">
+						<div class="fill" />
+					</div>
+				</div>
 
-	<div class="meta">
-		<span data-percent>{percent} %</span>
-		<span data-donors></span>
-	</div>
+				<div class="meta">
+					<span data-percent>{cagnotte.percent} %</span>
+					<span data-donors />
+				</div>
 
-	<a class="btn btn-primary" href={donateUrl} target="_blank" rel="noopener">
-		{projectSlug ? 'Faire un don' : `Découvrir ${platformName}`}
-	</a>
+				<a class="btn btn-primary" href={cagnotte.donateUrl} target="_blank" rel="noopener">
+					{cagnotte.projectSlug ? `Soutenir ${cagnotte.athlete}` : `Découvrir ${platformName}`}
+				</a>
+			</div>
+		))
+	}
 	<p class="note">
 		Paiement sécurisé sur {platformName}, la plateforme de la Fondation du Sport Français, qui vous envoie le reçu
 		fiscal par e-mail : un don de 100 € vous revient à 34 € après réduction d’impôt.
@@ -116,6 +136,11 @@ const live = Boolean(projectSlug) || initialRaised > 0;
 		}
 	}
 
+	.cagnottes {
+		display: grid;
+		gap: 16px;
+	}
+
 	.donation {
 		display: grid;
 		gap: 16px;
@@ -151,6 +176,10 @@ const live = Boolean(projectSlug) || initialRaised > 0;
 		border-radius: 50%;
 		background: var(--red);
 		box-shadow: 0 0 0 4px rgb(239 65 53 / 0.18);
+	}
+
+	.top h3 {
+		margin-top: 6px;
 	}
 
 	.amount {
