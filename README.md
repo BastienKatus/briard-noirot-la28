@@ -47,7 +47,6 @@ Tous les textes sont dans `src/data/`, séparés de la mise en page :
 
 ## À compléter avant la mise en ligne
 
-- [ ] Coordonnées de l’éditeur dans les mentions légales
 - [ ] Crédits photos, et accord des photographes (FFAviron / Magaviron, World Rowing…)
 - [ ] Relecture des biographies, du palmarès et de l’objectif LA 2028 par les athlètes
 - [ ] Slug de la cagnotte Soutiens ton Sportif de Vincent (celle de Chloé est en place)

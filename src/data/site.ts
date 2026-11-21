@@ -6,6 +6,11 @@ export const site = {
 
 	// Le formulaire de contact écrit à cette adresse, redirigée chez IONOS vers une boîte personnelle.
 	contactEmail: 'contact@briard-noirot-la28.fr',
+	// Web3Forms relaie le formulaire vers contactEmail. La clé est publique par conception : elle figure dans la page.
+	contactForm: {
+		endpoint: 'https://api.web3forms.com/submit',
+		accessKey: 'e03ce2bb-42ed-44b2-aa28-e1bd54956dac',
+	},
 
 	nav: [
 		{ label: 'Accueil', href: '/' },

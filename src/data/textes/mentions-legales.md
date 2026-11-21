@@ -2,8 +2,6 @@
 
 Site édité par Chloé Briard et Vincent Noirot, athlètes de haut niveau.
 
-- Adresse : _à compléter_
-- Téléphone : _à compléter_
 - E-mail : [contact@briard-noirot-la28.fr](mailto:contact@briard-noirot-la28.fr)
 
 Directeurs de la publication : Chloé Briard et Vincent Noirot.
@@ -23,7 +21,7 @@ Les dons sont collectés par la Fondation du Sport Français, reconnue d’utili
 - **Aucun cookie ni traceur** n’est déposé par ce site : aucun bandeau de consentement n’est donc nécessaire.
 - **Hébergement** : GitHub enregistre l’adresse IP des visiteurs à des fins de sécurité.
 - **Jauges de collecte** : pour afficher les montants collectés, votre navigateur interroge directement soutienstonsportif.fr.
-- **Messages** : le formulaire de contact ouvre votre propre messagerie ; rien n’est enregistré par le site. Les e-mails que vous nous envoyez sont utilisés uniquement pour vous répondre et conservés le temps de nos échanges.
+- **Messages** : le formulaire de contact transmet votre nom, votre entreprise, votre e-mail et votre message au service [Web3Forms](https://web3forms.com/), qui nous les envoie par e-mail. Web3Forms conserve ces messages au plus trois ans (voir sa [politique de confidentialité](https://web3forms.com/privacy)). Nous les utilisons uniquement pour vous répondre et les conservons le temps de nos échanges.
 
 Vous pouvez demander l’accès, la rectification ou la suppression de vos données en nous écrivant, et introduire une réclamation auprès de la [CNIL](https://www.cnil.fr/).
 
