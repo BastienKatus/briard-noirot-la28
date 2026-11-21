@@ -13,7 +13,7 @@ Construit avec [Astro](https://docs.astro.build) : le build produit du HTML/CSS 
 | Commande          | Action                                                            |
 | ----------------- | ----------------------------------------------------------------- |
 | `npm install`     | Installe les dépendances                                          |
-| `npm run dev`     | Serveur de dev sur http://localhost:4321/briard-noirot-la28/      |
+| `npm run dev`     | Serveur de dev sur http://localhost:4321/                         |
 | `npm run build`   | Génère le site statique dans `dist/`                              |
 | `npm run preview` | Sert localement le contenu de `dist/` (relancer après un build)   |
 | `npm run check`   | Vérifie les types et les composants Astro                         |
@@ -41,9 +41,9 @@ Tous les textes sont dans `src/data/`, séparés de la mise en page :
 ## Déploiement (GitHub Pages)
 
 1. Sur GitHub : **Settings → Pages → Build and deployment → Source : GitHub Actions**.
-2. Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui publie le site sur https://bastienkatus.github.io/briard-noirot-la28/.
+2. Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui publie le site sur https://briard-noirot-la28.fr/.
 
-Avec un domaine personnalisé : remplacer `site` par ce domaine et supprimer `base` dans `astro.config.mjs`.
+**Domaine** : `briard-noirot-la28.fr`, acheté chez IONOS et déclaré dans **Settings → Pages → Custom domain** (HTTPS forcé). DNS chez IONOS : 4 enregistrements A et 4 AAAA de GitHub Pages sur `@`, CNAME `www` vers `bastienkatus.github.io`. Pas de fichier `CNAME` dans le dépôt : un déploiement par GitHub Actions n'en a pas besoin. L'adresse `bastienkatus.github.io/briard-noirot-la28/` redirige vers le domaine.
 
 ## À compléter avant la mise en ligne
 
