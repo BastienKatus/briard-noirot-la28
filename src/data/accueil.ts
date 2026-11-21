@@ -40,16 +40,6 @@ export const project = {
 		'Départ en courant sur le sable, slalom en mer entre les bouées, retour sur la plage et sprint jusqu’à la ligne : le BRS est une course d’aviron explosive de quelques minutes, au programme olympique pour la première fois à Los Angeles.',
 		'Chaque pays ne peut qualifier qu’une rameuse et un rameur en solo, et ce sont eux qui forment le double mixte olympique. Notre projet : décrocher ces deux places et porter ensemble les couleurs de la France à Long Beach à Los Angeles.',
 	],
-	race: {
-		title: 'Le déroulé d’une course',
-		steps: [
-			'Départ en courant sur le sable jusqu’au bateau.',
-			'Embarquement et départ en mer.',
-			'Slalom entre les bouées.',
-			'Virage, puis retour vers la plage.',
-			'Sortie du bateau et sprint sur le sable jusqu’à la ligne d’arrivée.',
-		],
-	},
 	photo: 'double-lever-du-jour.jpg',
 	photoAlt: 'Double en mer calme au lever du jour, reflets sur l’eau',
 	timeline: [
@@ -67,6 +57,16 @@ export const project = {
 		{ title: 'Préparation', text: 'Stages, préparation physique et récupération.' },
 		{ title: 'Accompagnement', text: 'Suivi médical, kinésithérapie et nutrition.' },
 	],
+};
+
+export const seaRowing = {
+	eyebrow: 'Comprendre la course',
+	title: 'C’est quoi l’aviron de mer ?',
+	paragraphs: [
+		'L’aviron de mer se court en pleine mer, en endurance (coastal) ou en sprint depuis la plage : le BRS.',
+		'Une course de BRS est un duel entre deux bateaux, côte à côte. Au signal, le rameur sprinte 10 à 30 m sur le sable jusqu’à son bateau, puis rame 250 m vers le large en slalomant entre trois bouées. Il contourne la dernière, revient en ligne droite vers la plage, saute de son bateau et franchit en courant la ligne d’arrivée, qui est aussi celle du départ.',
+	],
+	boats: 'Le BRS se court en solo, en double ou en quatre de couple barré, où un seul membre de l’équipage fait la course à pied. Aux Jeux : le solo et le double mixte.',
 };
 
 export const support = {
