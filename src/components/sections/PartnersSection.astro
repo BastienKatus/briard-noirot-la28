@@ -1,0 +1,46 @@
+---
+import { partners } from '../../data/accueil';
+---
+
+<section id="partenaires" class="section partners">
+	<div class="container">
+		<p class="eyebrow">{partners.eyebrow}</p>
+		<h2>{partners.title}</h2>
+		<ul class="list">
+			{partners.list.map((partner) => <li class="glass">{partner}</li>)}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.partners {
+		padding-top: 0;
+	}
+
+	.list {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 16px;
+		margin: 28px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.list li {
+		display: grid;
+		place-items: center;
+		min-height: 112px;
+		padding: 20px 24px;
+		border-radius: var(--radius-md);
+		color: var(--navy-950);
+		font-size: 1.1rem;
+		font-weight: 800;
+		text-align: center;
+	}
+
+	@media (max-width: 720px) {
+		.list {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

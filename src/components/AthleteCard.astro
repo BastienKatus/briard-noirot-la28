@@ -30,11 +30,20 @@ const highlights = sortByYear(athlete.results.filter((result) => result.highligh
 		<h3>
 			<span class="first">{athlete.firstName}</span>{' '}{athlete.lastName}
 		</h3>
+		<p class="tagline">{athlete.tagline}</p>
 		<ul class="tags">
 			{athlete.tags.map((tag) => <li class="tag">{tag}</li>)}
 		</ul>
 
 		{athlete.bio.map((paragraph) => <p class="bio">{paragraph}</p>)}
+		{
+			athlete.bioMore.length > 0 && (
+				<details class="more-bio">
+					<summary>Lire la suite</summary>
+					{athlete.bioMore.map((paragraph) => <p class="bio">{paragraph}</p>)}
+				</details>
+			)
+		}
 
 		{
 			athlete.aside && (
@@ -101,6 +110,12 @@ const highlights = sortByYear(athlete.results.filter((result) => result.highligh
 		color: var(--blue);
 	}
 
+	.tagline {
+		margin: 6px 0 0;
+		font-weight: 700;
+		color: var(--navy-900);
+	}
+
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
@@ -112,6 +127,20 @@ const highlights = sortByYear(athlete.results.filter((result) => result.highligh
 
 	.bio {
 		color: var(--ink-soft);
+	}
+
+	.more-bio {
+		margin-bottom: 1em;
+	}
+
+	.more-bio summary {
+		font-weight: 700;
+		color: var(--blue);
+		cursor: pointer;
+	}
+
+	.more-bio[open] summary {
+		margin-bottom: 1em;
 	}
 
 	.aside {

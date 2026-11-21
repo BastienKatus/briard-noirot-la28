@@ -8,17 +8,17 @@ import { duo, sortByYear } from '../data/palmares';
 const all = athletes.flatMap((athlete) => athlete.results);
 const stats = [
 	{ value: all.filter((r) => r.level === 'monde' && r.medal).length, label: 'médailles mondiales' },
-	{ value: all.filter((r) => r.level === 'france' && r.medal === 'gold').length, label: 'titres de champion de France' },
+	{ value: athletes.reduce((sum, athlete) => sum + athlete.summary.nationalTitles, 0), label: 'titres nationaux' },
 	{ value: 'LA 2028', label: 'l’objectif commun' },
 ];
 
 ---
 
-<BaseLayout title="Palmarès" description="Palmarès de Chloé Briard et Vincent Noirot : résultats mondiaux, européens et nationaux en aviron de mer et beach sprint.">
+<BaseLayout title="Palmarès" description="Palmarès de Chloé Briard et Vincent Noirot : résultats mondiaux, européens et nationaux en aviron de mer et beach rowing sprint.">
 	<PageHeader
 		eyebrow="Palmarès"
 		title="Les résultats"
-		lead="Championnats du monde, d’Europe et de France : le parcours de Chloé et Vincent en aviron de mer et en beach sprint."
+		lead="Championnats du monde, d’Europe et de France : le parcours de Chloé et Vincent en aviron de mer et en beach rowing sprint."
 		image="antalya-2025-podium-4.jpg"
 	/>
 
@@ -64,6 +64,15 @@ const stats = [
 							<span>{athlete.firstName}</span> {athlete.lastName}
 						</h2>
 						<p class="discipline">{athlete.discipline}</p>
+						<div class="summary">
+							<h3>En résumé</h3>
+							<ul>
+								{athlete.summary.items.map((item) => (
+									<li>{item}</li>
+								))}
+							</ul>
+						</div>
+						<h3 class="results-title">Résultats détaillés</h3>
 						<ul class="results">
 							{sortByYear(athlete.results).map((result) => (
 								<ResultItem result={result} />
@@ -74,7 +83,8 @@ const stats = [
 			}
 		</div>
 		<p class="container note">
-			Palmarès établi à partir de sources publiques (World Rowing, FFAviron, Mag Aviron, presse régionale), à compléter.
+			Résumés communiqués par Chloé et Vincent ; résultats détaillés établis à partir de sources publiques (World Rowing,
+			FFAviron, Mag Aviron, presse régionale) et complétés par les athlètes.
 		</p>
 	</section>
 </BaseLayout>
@@ -161,6 +171,33 @@ const stats = [
 		margin: 6px 0 12px;
 		color: var(--ink-soft);
 		font-weight: 600;
+	}
+
+	.summary {
+		margin: 8px 0 24px;
+		padding: 16px 20px;
+		border-left: 4px solid var(--red);
+		border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+		background: rgb(255 255 255 / 0.55);
+	}
+
+	.summary ul {
+		margin: 8px 0 0;
+		padding-left: 1.1em;
+		color: var(--ink-soft);
+		font-size: 0.95rem;
+	}
+
+	.summary li + li {
+		margin-top: 4px;
+	}
+
+	.summary h3,
+	.results-title {
+		font-size: 0.8rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--ink-soft);
 	}
 
 	.results {

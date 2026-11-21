@@ -1,13 +1,23 @@
 ---
 import AthleteCard from '../AthleteCard.astro';
 import { athletes } from '../../data/athletes';
+import { story } from '../../data/accueil';
+
+const [opening, ...paragraphs] = story.paragraphs;
 ---
 
 <section id="rameurs" class="section">
 	<div class="container">
-		<p class="eyebrow">Les rameurs</p>
-		<h2>Deux solos, un double mixte</h2>
-		<p class="lead">Licenciés à l’Aviron Club Lyon-Caluire et membres de l’équipe de France de beach sprint.</p>
+		<div class="story">
+			<p class="eyebrow">{story.eyebrow}</p>
+			<h2>{story.title}</h2>
+			<p class="lead">{opening}</p>
+			{paragraphs.map((paragraph) => <p class="text">{paragraph}</p>)}
+			<p class="signature">
+				<strong>{story.signature}</strong>
+				<span>{story.tagline}</span>
+			</p>
+		</div>
 		<div class="grid">
 			{athletes.map((athlete) => <AthleteCard athlete={athlete} />)}
 		</div>
@@ -15,6 +25,33 @@ import { athletes } from '../../data/athletes';
 </section>
 
 <style>
+	.story {
+		max-width: 760px;
+	}
+
+	.text {
+		color: var(--ink-soft);
+	}
+
+	.signature {
+		display: grid;
+		gap: 2px;
+		margin: 28px 0 0;
+		padding: 14px 18px;
+		border-left: 4px solid var(--red);
+		border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+		background: rgb(255 255 255 / 0.55);
+	}
+
+	.signature strong {
+		color: var(--navy-950);
+	}
+
+	.signature span {
+		color: var(--ink-soft);
+		font-style: italic;
+	}
+
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
