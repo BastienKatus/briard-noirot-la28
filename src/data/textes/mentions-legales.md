@@ -4,7 +4,7 @@ Site édité par Chloé Briard et Vincent Noirot, athlètes de haut niveau.
 
 - Adresse : _à compléter_
 - Téléphone : _à compléter_
-- E-mail : _à compléter_
+- E-mail : [contact@briard-noirot-la28.fr](mailto:contact@briard-noirot-la28.fr)
 
 Directeurs de la publication : Chloé Briard et Vincent Noirot.
 
