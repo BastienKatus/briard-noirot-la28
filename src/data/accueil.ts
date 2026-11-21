@@ -47,7 +47,7 @@ export const project = {
 		{
 			when: '2027',
 			title: 'Se qualifier',
-			text: 'Juin : Jeux européens en Turquie, première épreuve de qualification. Octobre : championnats du monde à Oeiras (Portugal), deuxième épreuve de qualification olympique.',
+			text: 'En juin, les Jeux européens d’Istanbul (Turquie) ouvrent les qualifications olympiques. Du 6 au 9 octobre, les championnats du monde d’Oeiras (Portugal) en sont la deuxième étape.',
 		},
 		{ when: '2028', title: 'Los Angeles', text: 'Aucune épreuve qualificative : place aux Jeux, les 24 et 25 juillet à Long Beach.' },
 	],

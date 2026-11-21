@@ -115,7 +115,7 @@ export const palmares: Record<'chloe' | 'vincent', Result[]> = {
 			medal: 'bronze',
 		},
 		{
-			year: 2023,
+			year: 2024,
 			competition: 'Championnats d’Europe d’aviron de mer',
 			location: 'Gdansk (Pologne)',
 			event: 'Double femme',
@@ -125,7 +125,7 @@ export const palmares: Record<'chloe' | 'vincent', Result[]> = {
 		},
 		{
 			year: 2024,
-			competition: 'Championnats d’Europe',
+			competition: 'Championnats d’Europe d’aviron de mer',
 			location: 'Gdansk (Pologne)',
 			event: 'Double mixte',
 			result: 'Médaille d’or',
