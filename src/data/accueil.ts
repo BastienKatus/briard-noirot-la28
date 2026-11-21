@@ -8,7 +8,7 @@ export const hero = {
 	photoScale: 1.5,
 	photoPosition: 'left 61%',
 	facts: [
-		{ value: '2', label: 'médailles de bronze mondiales' },
+		{ value: '3', label: 'médailles mondiales' },
 		{ value: '2026', label: 'vice-champions de France en double mixte' },
 	],
 	countdown: {
@@ -23,7 +23,7 @@ export const story = {
 	eyebrow: 'Les rameurs',
 	title: 'Une rencontre sur le sable, un rêve à deux',
 	paragraphs: [
-		'C’est sur le sable, autour de notre passion commune pour l’aviron, que nos chemins se sont croisés. Le Beach Rowing nous a réunis, et il est aujourd’hui bien plus qu’un sport : il est le fil conducteur de notre histoire et du projet que nous construisons ensemble.',
+		'C’est sur le sable, autour de notre passion commune pour l’aviron, que nos chemins se sont croisés. Le BRS nous a réunis, et il est aujourd’hui bien plus qu’un sport : il est le fil conducteur de notre histoire et du projet que nous construisons ensemble.',
 		'Au fil des compétitions, des entraînements et des aventures internationales, nous avons appris à avancer ensemble, à partager les exigences du haut niveau et à nous soutenir dans chaque étape de nos parcours.',
 		'Aujourd’hui, nous avons décidé de donner une nouvelle dimension à cette aventure en associant pleinement notre projet de couple à nos ambitions sportives individuelles. Car si nous partageons le même rêve olympique, le chemin pour y parvenir reste propre à chacun d’entre nous. La sélection pour les Jeux de Los Angeles 2028 se jouera individuellement, et chacun devra gagner sa place au sein de l’équipe de France.',
 		'Entre vie professionnelle, entraînements quotidiens, stages et compétitions internationales, nous faisons le choix de mener ces deux parcours de front, avec une conviction : être ensemble est une force pour aller chacun le plus loin possible dans notre discipline.',
@@ -80,5 +80,4 @@ export const support = {
 export const partners = {
 	eyebrow: 'Ils nous soutiennent',
 	title: 'Nos partenaires',
-	list: ['Swift Racing', 'Ville de Caluire', 'Aviron Club de Lyon Caluire'],
 };

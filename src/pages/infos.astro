@@ -4,6 +4,7 @@ import PageHeader from '../components/PageHeader.astro';
 import DonationProgress from '../components/DonationProgress.astro';
 import ContactBlock from '../components/ContactBlock.astro';
 import { steps, taxCards, comparison, faq } from '../data/dons';
+import { site } from '../data/site';
 import { Content as MentionsLegales } from '../data/textes/mentions-legales.md';
 
 const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
@@ -55,9 +56,6 @@ const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'
 							<p class="rate">
 								{card.rate} <span>{card.summary}</span>
 							</p>
-							<ul class="rules">
-								{card.rules.map((rule) => <li>{rule}</li>)}
-							</ul>
 							<table>
 								<thead>
 									<tr>
@@ -75,7 +73,7 @@ const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'
 								</tbody>
 							</table>
 							<a class="source" href={card.source} target="_blank" rel="noopener">
-								Source : service-public.gouv.fr
+								En savoir plus sur service-public.gouv.fr
 							</a>
 						</article>
 					))
@@ -128,6 +126,11 @@ const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'
 					))
 				}
 			</div>
+			<p class="disclaimer">
+				Ces informations sont données à titre indicatif. Les conditions de la collecte sont détaillées sur{' '}
+				<a href={site.donation.platformUrl} target="_blank" rel="noopener">{site.donation.platformName}</a>, et les règles de
+				la réduction d’impôt sur <a href={taxCards[0].source} target="_blank" rel="noopener">service-public.gouv.fr</a>.
+			</p>
 		</div>
 	</section>
 
@@ -233,11 +236,10 @@ const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'
 		color: var(--ink-soft);
 	}
 
-	.rules {
-		margin: 0;
-		padding-left: 1.1em;
+	.disclaimer {
+		margin: 20px 0 0;
+		font-size: 0.88rem;
 		color: var(--ink-soft);
-		font-size: 0.95rem;
 	}
 
 	table {

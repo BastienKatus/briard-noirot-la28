@@ -18,7 +18,7 @@ const year = new Date().getFullYear();
 		<div class="supporters">
 			<p class="supporters-title">Ils nous accompagnent</p>
 			<ul>
-				{site.supporters.map((supporter) => <li>{supporter}</li>)}
+				{site.supporters.map((supporter) => <li>{supporter.name}</li>)}
 			</ul>
 		</div>
 		<p class="small copyright">

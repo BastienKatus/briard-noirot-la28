@@ -14,13 +14,18 @@ export const site = {
 		{ label: 'Dons & infos', href: '/infos/' },
 	],
 
-	// Encadré « Ils nous accompagnent » du pied de page : sponsors et personnes, sans logo.
-	supporters: ['Swift Racing', 'Aviron Club de Lyon Caluire'],
+	// Sponsors et personnes qui nous accompagnent : section « Nos partenaires » de l'accueil et encadré du pied de page.
+	// logo = fichier de src/assets/logos/, affiché seulement dans la section de l'accueil.
+	supporters: [
+		{ name: 'Swift Racing', logo: 'swift-racing.jpg' },
+		{ name: 'Aviron Club de Lyon Caluire', logo: 'aviron-club-lyon-caluire.png' },
+		{ name: 'Ville de Caluire', logo: 'ville-caluire.png' },
+	],
 
 	donation: {
 		platformName: 'Soutiens ton Sportif',
 		platformUrl: 'https://www.soutienstonsportif.fr/',
-		// Objectif affiché tant que la plateforme ne fournit pas le sien. Les CGU plafonnent une cagnotte à 20 000 €.
+		// Objectif affiché tant que la plateforme ne fournit pas le sien.
 		goal: 20000,
 		// Une cagnotte par athlète, la plateforme n'acceptant pas de cagnotte commune : une jauge par entrée.
 		// projectSlug = fin de l'URL soutienstonsportif.fr/project/<slug> ; vide tant que la page n'existe pas,
