@@ -4,8 +4,8 @@ export const site = {
 	description:
 		'Chloé Briard et Vincent Noirot, rameurs de l’équipe de France de beach rowing sprint (BRS), visent les Jeux olympiques de Los Angeles 2028. Soutenez leur projet.',
 
-	// À remplacer par la vraie adresse avant la mise en ligne : le formulaire de contact écrit à cette adresse.
-	contactEmail: 'contact@example.com',
+	// Le formulaire de contact écrit à cette adresse, redirigée chez IONOS vers une boîte personnelle.
+	contactEmail: 'contact@briard-noirot-la28.fr',
 
 	nav: [
 		{ label: 'Accueil', href: '/' },

@@ -47,7 +47,6 @@ Tous les textes sont dans `src/data/`, séparés de la mise en page :
 
 ## À compléter avant la mise en ligne
 
-- [ ] E-mail de contact réel (`site.ts`, actuellement `contact@example.com`)
 - [ ] Coordonnées de l’éditeur dans les mentions légales
 - [ ] Crédits photos, et accord des photographes (FFAviron / Magaviron, World Rowing…)
 - [ ] Relecture des biographies, du palmarès et de l’objectif LA 2028 par les athlètes
