@@ -5,6 +5,8 @@ export interface Athlete {
 	firstName: string;
 	lastName: string;
 	discipline: string;
+	/** Fonction déclarée aux moteurs de recherche (données structurées de l'accueil). */
+	role: string;
 	tags: string[];
 	photo: string;
 	photoAlt: string;
@@ -26,6 +28,7 @@ export const athletes: Athlete[] = [
 		firstName: 'Chloé',
 		lastName: 'Briard',
 		discipline: 'Solo femme · double mixte',
+		role: 'Rameuse de l’équipe de France de beach rowing sprint',
 		tags: ['Aviron Club de Lyon Caluire', 'Formée à Saint-Malo', 'Équipe de France'],
 		photo: 'antalya-2025-portrait-chloe.jpg',
 		photoAlt: 'Chloé Briard en tenue de l’équipe de France aux Beach Sprint Finals 2025',
@@ -55,6 +58,7 @@ export const athletes: Athlete[] = [
 		firstName: 'Vincent',
 		lastName: 'Noirot',
 		discipline: 'Solo homme · double mixte',
+		role: 'Rameur de l’équipe de France de beach rowing sprint',
 		tags: ['Aviron Club de Lyon Caluire', 'Originaire de Toulon', 'Équipe de France'],
 		photo: 'vincent-en-mer.jpg',
 		photoAlt: 'Vincent Noirot en solo sur une mer calme',

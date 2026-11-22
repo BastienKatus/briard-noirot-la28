@@ -1,4 +1,5 @@
 ---
+import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HomeHero from '../components/sections/HomeHero.astro';
 import AthletesSection from '../components/sections/AthletesSection.astro';
@@ -7,9 +8,55 @@ import SeaRowingSection from '../components/sections/SeaRowingSection.astro';
 import SupportSection from '../components/sections/SupportSection.astro';
 import PartnersSection from '../components/sections/PartnersSection.astro';
 import ContactBlock from '../components/ContactBlock.astro';
+import { athletes } from '../data/athletes';
+import { site } from '../data/site';
+import { photo } from '../lib/photos';
+
+const home = new URL('/', Astro.site).href;
+const club = {
+	'@type': 'SportsOrganization',
+	name: 'Aviron Club de Lyon Caluire',
+	sport: 'Aviron',
+	url: 'https://www.aviron-club-lyon-caluire.com/',
+};
+const people = await Promise.all(
+	athletes.map(async (athlete) => {
+		const portrait = await getImage({ src: photo(athlete.photo), width: 800, format: 'jpg' });
+		const cagnotte = site.donation.projects.find((project) => project.athlete === athlete.firstName)?.projectSlug;
+		return {
+			'@type': 'Person',
+			'@id': `${home}#${athlete.id}`,
+			name: `${athlete.firstName} ${athlete.lastName}`,
+			givenName: athlete.firstName,
+			familyName: athlete.lastName,
+			jobTitle: athlete.role,
+			description: athlete.tagline,
+			image: new URL(portrait.src, Astro.site).href,
+			url: `${home}#rameur-${athlete.id}`,
+			nationality: { '@type': 'Country', name: 'France' },
+			memberOf: club,
+			knowsAbout: ['Aviron de mer', 'Beach rowing sprint'],
+			sameAs: cagnotte ? [new URL(`project/${cagnotte}`, site.donation.platformUrl).href] : undefined,
+		};
+	}),
+);
+const schema = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${home}#site`,
+			url: home,
+			name: site.name,
+			inLanguage: 'fr-FR',
+			about: people.map((person) => ({ '@id': person['@id'] })),
+		},
+		...people,
+	],
+};
 ---
 
-<BaseLayout>
+<BaseLayout schema={schema}>
 	<HomeHero />
 	<AthletesSection />
 	<ProjectSection />
