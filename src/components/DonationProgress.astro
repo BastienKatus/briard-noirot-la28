@@ -12,7 +12,7 @@ const cagnottes = projects.map(({ athlete, projectSlug, initialRaised }) => {
 		initialRaised,
 		percent: Math.min(percent, 100),
 		endpoint: projectSlug ? `${projectUrl}.json` : undefined,
-		donateUrl: projectSlug ? `${projectUrl}/donate` : platformUrl,
+		donateUrl: projectUrl || platformUrl,
 		live: Boolean(projectSlug) || initialRaised > 0,
 	};
 });
