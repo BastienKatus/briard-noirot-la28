@@ -1,8 +1,15 @@
 export const site = {
 	name: 'Chloé Briard & Vincent Noirot',
 	shortName: 'Briard · Noirot',
+	// Titre et description de l'accueil dans les moteurs de recherche ; les autres pages passent les leurs à BaseLayout.
+	title: 'Chloé Briard et Vincent Noirot · Aviron de mer, JO Los Angeles 2028',
 	description:
-		'Chloé Briard et Vincent Noirot, rameurs de l’équipe de France de beach rowing sprint (BRS), visent les Jeux olympiques de Los Angeles 2028. Soutenez leur projet.',
+		'Chloé Briard et Vincent Noirot, rameurs de l’équipe de France d’aviron de mer (beach rowing sprint), visent les JO de Los Angeles 2028. Soutenez-les !',
+	// Image d'aperçu des liens partagés (réseaux sociaux, messageries), recadrée en 1200 × 630.
+	share: {
+		photo: 'duo-en-mer.jpg',
+		alt: 'Double mixte lancé à pleine vitesse dans les vagues',
+	},
 
 	// Le formulaire de contact écrit à cette adresse, redirigée chez IONOS vers une boîte personnelle.
 	contactEmail: 'contact@briard-noirot-la28.fr',

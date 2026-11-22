@@ -8,9 +8,22 @@ import { site } from '../data/site';
 import { Content as MentionsLegales } from '../data/textes/mentions-legales.md';
 
 const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faq.map((item) => ({
+		'@type': 'Question',
+		name: item.question,
+		acceptedAnswer: { '@type': 'Answer', text: item.answer },
+	})),
+};
 ---
 
-<BaseLayout title="Dons & infos" description="Comment soutenir Chloé Briard et Vincent Noirot, défiscalisation des dons, mécénat, sponsoring et mentions légales.">
+<BaseLayout
+	title="Soutenir Chloé Briard et Vincent Noirot · Dons aux sportifs, JO 2028"
+	description="Soutenez deux sportifs de haut niveau vers les JO de Los Angeles 2028 : dons défiscalisés via Soutiens ton Sportif (Fondation du Sport Français), mécénat ou sponsoring."
+	schema={faqSchema}
+>
 	<PageHeader
 		eyebrow="Dons & infos"
 		title="Donner, simplement"
