@@ -27,13 +27,13 @@ export const site = {
 	],
 
 	// Sponsors et personnes qui nous accompagnent : section « Nos partenaires » de l'accueil et encadré du pied de page.
-	// logo = fichier de src/assets/logos/, affiché seulement dans la section de l'accueil.
-	// role = précision affichée sous le nom dans la section de l'accueil, pour un partenaire qui n'est pas un sponsor.
+	// logo = fichier de src/assets/logos/, affiché seulement dans la section de l'accueil ; url = page d'accueil du partenaire.
+	// credit = réalisateur du site : absent de l'encadré du pied de page, il est crédité sous le copyright.
 	supporters: [
-		{ name: 'Swift Racing', logo: 'swift-racing.jpg' },
-		{ name: 'Aviron Club de Lyon Caluire', logo: 'aviron-club-lyon-caluire.png' },
-		{ name: 'Ville de Caluire', logo: 'ville-caluire.png' },
-		{ name: 'Confluence Partenaires', logo: 'confluence-partenaires.svg', role: 'Réalisation du site internet' },
+		{ name: 'Swift Racing', logo: 'swift-racing.jpg', url: 'https://swiftracing.com/' },
+		{ name: 'Aviron Club de Lyon Caluire', logo: 'aviron-club-lyon-caluire.png', url: 'https://www.aviron-club-lyon-caluire.com/' },
+		{ name: 'Ville de Caluire', logo: 'ville-caluire.png', url: 'https://www.ville-caluire.fr/' },
+		{ name: 'Confluence Partenaires', logo: 'confluence-partenaires.svg', url: 'https://confluence-partenaires.fr/', credit: true },
 	],
 
 	donation: {
