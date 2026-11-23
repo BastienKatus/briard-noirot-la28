@@ -28,10 +28,12 @@ export const site = {
 
 	// Sponsors et personnes qui nous accompagnent : section « Nos partenaires » de l'accueil et encadré du pied de page.
 	// logo = fichier de src/assets/logos/, affiché seulement dans la section de l'accueil.
+	// role = précision affichée sous le nom dans la section de l'accueil, pour un partenaire qui n'est pas un sponsor.
 	supporters: [
 		{ name: 'Swift Racing', logo: 'swift-racing.jpg' },
 		{ name: 'Aviron Club de Lyon Caluire', logo: 'aviron-club-lyon-caluire.png' },
 		{ name: 'Ville de Caluire', logo: 'ville-caluire.png' },
+		{ name: 'Confluence Partenaires', logo: 'confluence-partenaires.svg', role: 'Réalisation du site internet' },
 	],
 
 	donation: {

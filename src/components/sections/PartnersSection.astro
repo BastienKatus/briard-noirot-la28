@@ -14,7 +14,10 @@ import { photo } from '../../lib/photos';
 				site.supporters.map((partner) => (
 					<li class="glass">
 						{partner.logo && <Image class="logo" src={photo(partner.logo)} alt="" widths={[240, 480]} sizes="240px" />}
-						<span class:list={['name', { solo: !partner.logo }]}>{partner.name}</span>
+						<span class:list={['name', { solo: !partner.logo }]}>
+							{partner.name}
+							{partner.role && <span class="role">{partner.role}</span>}
+						</span>
 					</li>
 				))
 			}
@@ -29,7 +32,7 @@ import { photo } from '../../lib/photos';
 
 	.list {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 		gap: 16px;
 		margin: 28px 0 0;
 		padding: 0;
@@ -66,6 +69,19 @@ import { photo } from '../../lib/photos';
 		color: var(--navy-950);
 		font-size: 1.1rem;
 		font-weight: 800;
+	}
+
+	.role {
+		display: block;
+		margin-top: 2px;
+		font-size: 0.8rem;
+		font-weight: 500;
+	}
+
+	@media (max-width: 960px) {
+		.list {
+			grid-template-columns: repeat(2, 1fr);
+		}
 	}
 
 	@media (max-width: 720px) {

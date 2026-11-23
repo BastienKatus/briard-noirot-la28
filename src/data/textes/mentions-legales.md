@@ -12,6 +12,12 @@ GitHub, Inc. (service GitHub Pages)
 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis
 [github.com](https://github.com)
 
+## Réalisation du site
+
+Confluence Partenaires (SARL)
+31 rue Viret, 69100 Villeurbanne, France
+[confluence-partenaires.fr](https://confluence-partenaires.fr/)
+
 ## Collecte des dons
 
 Les dons sont collectés par la Fondation du Sport Français, reconnue d’utilité publique par décret du 24 août 2011 (6 avenue de Choisy, 75013 Paris), via la plateforme [Soutiens ton Sportif](https://www.soutienstonsportif.fr/). Ce site ne traite aucun paiement.
