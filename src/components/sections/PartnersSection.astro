@@ -12,12 +12,11 @@ import { photo } from '../../lib/photos';
 		<ul class="list">
 			{
 				site.supporters.map((partner) => (
-					<li class="glass">
-						{partner.logo && <Image class="logo" src={photo(partner.logo)} alt="" widths={[240, 480]} sizes="240px" />}
-						<span class:list={['name', { solo: !partner.logo }]}>
-							{partner.name}
-							{partner.role && <span class="role">{partner.role}</span>}
-						</span>
+					<li>
+						<a class="card glass" href={partner.url} target="_blank" rel="noopener">
+							{partner.logo && <Image class="logo" src={photo(partner.logo)} alt="" widths={[240, 480]} sizes="240px" />}
+							<span class:list={['name', { solo: !partner.logo }]}>{partner.name}</span>
+						</a>
 					</li>
 				))
 			}
@@ -39,15 +38,22 @@ import { photo } from '../../lib/photos';
 		list-style: none;
 	}
 
-	.list li {
+	.card {
 		display: grid;
 		gap: 14px;
 		place-items: center;
 		align-content: center;
+		height: 100%;
 		min-height: 168px;
 		padding: 24px;
 		border-radius: var(--radius-md);
 		text-align: center;
+		text-decoration: none;
+		transition: transform 0.2s ease;
+	}
+
+	.card:hover {
+		transform: translateY(-2px);
 	}
 
 	/* multiply efface le fond blanc opaque du logo Swift Racing (JPG) sur le verre clair des cartes. */
@@ -69,13 +75,6 @@ import { photo } from '../../lib/photos';
 		color: var(--navy-950);
 		font-size: 1.1rem;
 		font-weight: 800;
-	}
-
-	.role {
-		display: block;
-		margin-top: 2px;
-		font-size: 0.8rem;
-		font-weight: 500;
 	}
 
 	@media (max-width: 960px) {

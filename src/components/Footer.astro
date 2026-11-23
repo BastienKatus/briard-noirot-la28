@@ -3,6 +3,7 @@ import { site } from '../data/site';
 import { url } from '../lib/url';
 
 const year = new Date().getFullYear();
+const credit = site.supporters.find((supporter) => supporter.credit);
 ---
 
 <footer class="site-footer">
@@ -18,12 +19,20 @@ const year = new Date().getFullYear();
 		<div class="supporters">
 			<p class="supporters-title">Ils nous accompagnent</p>
 			<ul>
-				{site.supporters.map((supporter) => <li>{supporter.name}</li>)}
+				{site.supporters.filter((supporter) => !supporter.credit).map((supporter) => <li>{supporter.name}</li>)}
 			</ul>
 		</div>
 		<p class="small copyright">
 			© {year} {site.name} · Dons collectés par la Fondation du Sport Français via{' '}
 			<a href={site.donation.platformUrl} target="_blank" rel="noopener">{site.donation.platformName}</a>
+			{
+				credit && (
+					<>
+						{' · Site réalisé par '}
+						<a href={credit.url} target="_blank" rel="noopener">{credit.name}</a>
+					</>
+				)
+			}
 		</p>
 	</div>
 </footer>
