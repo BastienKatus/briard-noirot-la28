@@ -1,0 +1,175 @@
+---
+import { site } from '../data/site';
+import { seasonCalendar, seasons } from '../lib/seasons';
+
+// Le site est statique : la saison se décide dans le navigateur, au jour de Paris, à partir des dates calculées au build.
+// Onze ans d'avance couvrent largement l'intervalle entre deux mises en ligne ; au-delà, le script prend des dates approchées.
+const year = new Date().getFullYear();
+const calendar = seasonCalendar(year - 1, year + 10);
+
+// Motifs du fond : x (% de la largeur), y (% de la hauteur : scintillements de l'été et fond sans animation),
+// taille (px), durée et décalage de la chute (s), balancement (px) et inclinaison (deg). Valeurs fixes : le fond ne change pas d'un build à l'autre.
+const particles = [
+	{ x: 4, y: 22, size: 24, duration: 26, delay: -2, sway: 36, tilt: 50 },
+	{ x: 14, y: 64, size: 17, duration: 33, delay: -17, sway: 24, tilt: 35 },
+	{ x: 25, y: 38, size: 27, duration: 29, delay: -9, sway: 44, tilt: 60 },
+	{ x: 37, y: 82, size: 18, duration: 36, delay: -25, sway: 28, tilt: 30 },
+	{ x: 49, y: 12, size: 22, duration: 31, delay: -14, sway: 40, tilt: 45 },
+	{ x: 61, y: 55, size: 16, duration: 38, delay: -30, sway: 20, tilt: 25 },
+	{ x: 72, y: 30, size: 26, duration: 27, delay: -6, sway: 42, tilt: 55 },
+	{ x: 83, y: 74, size: 19, duration: 34, delay: -21, sway: 30, tilt: 40 },
+	{ x: 92, y: 44, size: 25, duration: 30, delay: -11, sway: 38, tilt: 50 },
+	{ x: 97, y: 8, size: 17, duration: 37, delay: -27, sway: 22, tilt: 30 },
+];
+---
+
+{
+	site.seasonalTheme && (
+		<>
+			<script define:vars={{ calendar, names: seasons }}>
+				const forced = new URLSearchParams(location.search).get('saison');
+				let season = names.includes(forced) ? forced : '';
+				if (!season) {
+					const today = Object.fromEntries(
+						new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' })
+							.formatToParts(new Date())
+							.map(({ type, value }) => [type, value]),
+					);
+					const starts = calendar[today.year] || ['03-20', '06-21', '09-22', '12-21'];
+					// Saisons déjà commencées cette année : aucune = encore l'hiver de l'année précédente.
+					const begun = starts.filter((start) => start <= `${today.month}-${today.day}`).length;
+					season = names[(begun + 3) % 4];
+				}
+				document.documentElement.dataset.season = season;
+			</script>
+			<div class="season-decor" aria-hidden="true">
+				{particles.map((p) => (
+					<span
+						style={`--x: ${p.x}%; --y: ${p.y}%; --size: ${p.size}px; --duration: ${p.duration}s; --delay: ${p.delay}s; --sway: ${p.sway}px; --tilt: ${p.tilt}deg`}
+					/>
+				))}
+			</div>
+		</>
+	)
+}
+
+<style>
+	/* Couche fixe juste au-dessus des taches de couleur du fond (body::before) et sous tout le contenu :
+	   le verre la floute, elle ne gêne ni la lecture ni les clics. Sans JavaScript, le site reste sans habillage. */
+	.season-decor {
+		display: none;
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		overflow: hidden;
+		pointer-events: none;
+	}
+
+	:global(html[data-season]) .season-decor {
+		display: block;
+	}
+
+	.season-decor span {
+		position: absolute;
+		top: calc(-2 * var(--size));
+		left: var(--x);
+		width: var(--size);
+		height: var(--size);
+		background: var(--season-color);
+		opacity: var(--season-opacity);
+		-webkit-mask: var(--season-shape) center / contain no-repeat;
+		mask: var(--season-shape) center / contain no-repeat;
+		animation:
+			season-fall var(--duration) linear var(--delay) infinite,
+			season-sway calc(var(--duration) / 4) ease-in-out var(--delay) infinite alternate;
+		will-change: translate, transform;
+	}
+
+	.season-decor span:nth-child(even) {
+		background: var(--season-color-2);
+	}
+
+	@keyframes season-fall {
+		to {
+			translate: 0 calc(100vh + 4 * var(--size));
+		}
+	}
+
+	@keyframes season-sway {
+		from {
+			transform: translateX(calc(-1 * var(--sway))) rotate(calc(-1 * var(--tilt)));
+		}
+		to {
+			transform: translateX(var(--sway)) rotate(var(--tilt));
+		}
+	}
+
+	@keyframes season-twinkle {
+		0%,
+		100% {
+			opacity: 0;
+			scale: 0.4;
+		}
+		50% {
+			opacity: var(--season-opacity);
+			scale: 1;
+		}
+	}
+
+	:global(html[data-season='automne']) .season-decor {
+		--season-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 19C5 9.5 10.5 3.5 21 3c0 10.5-6 16-16 16z'/%3E%3Cpath d='M5.6 18.4 2.5 21.5' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+		--season-color: #d9782d;
+		--season-color-2: #b8452a;
+		--season-opacity: 0.55;
+		background: radial-gradient(52rem 36rem at 100% 0%, rgb(217 120 45 / 0.18), transparent 60%);
+	}
+
+	:global(html[data-season='hiver']) .season-decor {
+		--season-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2v10M9.5 4.5 12 7l2.5-2.5'/%3E%3Cpath transform='rotate(60 12 12)' d='M12 2v10M9.5 4.5 12 7l2.5-2.5'/%3E%3Cpath transform='rotate(120 12 12)' d='M12 2v10M9.5 4.5 12 7l2.5-2.5'/%3E%3Cpath transform='rotate(180 12 12)' d='M12 2v10M9.5 4.5 12 7l2.5-2.5'/%3E%3Cpath transform='rotate(240 12 12)' d='M12 2v10M9.5 4.5 12 7l2.5-2.5'/%3E%3Cpath transform='rotate(300 12 12)' d='M12 2v10M9.5 4.5 12 7l2.5-2.5'/%3E%3C/g%3E%3C/svg%3E");
+		--season-color: #7fa6d9;
+		--season-color-2: #a9c2e6;
+		--season-opacity: 0.6;
+		background: radial-gradient(52rem 36rem at 100% 0%, rgb(140 180 235 / 0.2), transparent 60%);
+	}
+
+	:global(html[data-season='printemps']) .season-decor {
+		--season-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22C5.5 16.5 5 9 9 3.5l3 2.8 3-2.8c4 5.5 3.5 13-3 18.5z'/%3E%3C/svg%3E");
+		--season-color: #ee8fae;
+		--season-color-2: #f5b8ca;
+		--season-opacity: 0.6;
+		background: radial-gradient(52rem 36rem at 100% 0%, rgb(120 196 130 / 0.18), transparent 60%);
+	}
+
+	/* L'été ne tombe pas : des reflets de soleil scintillent sur place. */
+	:global(html[data-season='ete']) .season-decor {
+		--season-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.5c.9 6.2 2.6 8.4 10.5 10.5-7.9 2.1-9.6 4.3-10.5 10.5-.9-6.2-2.6-8.4-10.5-10.5C9.4 9.9 11.1 7.7 12 1.5z'/%3E%3C/svg%3E");
+		--season-color: #f2b632;
+		--season-color-2: #f7cf5c;
+		--season-opacity: 0.85;
+		background: radial-gradient(52rem 36rem at 100% 0%, rgb(255 190 60 / 0.2), transparent 60%);
+	}
+
+	:global(html[data-season='ete']) .season-decor span {
+		top: var(--y);
+		animation: season-twinkle calc(var(--duration) / 4) ease-in-out var(--delay) infinite;
+	}
+
+	@media (max-width: 720px) {
+		.season-decor span:nth-child(3n) {
+			display: none;
+		}
+	}
+
+	/* Animations coupées (global.css) : les motifs restent posés dans la page au lieu d'attendre hors champ. */
+	@media (prefers-reduced-motion: reduce) {
+		.season-decor span {
+			top: var(--y);
+		}
+	}
+
+	@media print {
+		.season-decor {
+			display: none !important;
+		}
+	}
+</style>

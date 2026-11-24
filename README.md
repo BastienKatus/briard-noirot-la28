@@ -24,7 +24,7 @@ Tous les textes sont dans `src/data/`, séparés de la mise en page :
 
 | Fichier                               | Contenu                                                                 |
 | ------------------------------------- | ----------------------------------------------------------------------- |
-| `site.ts`                             | Nom du site, titre et description de l’accueil pour les moteurs de recherche, image de partage, **e-mail de contact**, menu, partenaires (accueil et pied de page), réglages des cagnottes |
+| `site.ts`                             | Nom du site, titre et description de l’accueil pour les moteurs de recherche, image de partage, **e-mail de contact**, habillage de saison, menu, partenaires (accueil et pied de page), réglages des cagnottes |
 | `accueil.ts`                          | Accueil : bandeau, présentation commune, projet, frise vers LA 2028, besoins, bloc « soutenir », partenaires |
 | `athletes.ts`                         | Présentations, photos et encadrés des deux rameurs                      |
 | `palmares.ts`                         | Résumés, résultats (`highlight: true` = affiché sur l’accueil), résultats en duo |
@@ -37,6 +37,8 @@ Tous les textes sont dans `src/data/`, séparés de la mise en page :
 **Ajouter une photo** : la déposer dans `src/assets/photos/`, puis la référencer par son nom de fichier (dans `albums.ts` par exemple). Astro génère automatiquement des versions WebP redimensionnées. Un nom de fichier inconnu fait échouer le build : une faute de frappe ne peut pas partir en ligne.
 
 **Activer une jauge de collecte** : Chloé et Vincent ont chacun leur cagnotte (la plateforme n’accepte pas de cagnotte commune). Quand la page Soutiens ton Sportif d’un athlète existe, renseigner son slug dans `site.ts` (`projectSlug` de son entrée dans `donation.projects`, la fin de l’URL `soutienstonsportif.fr/project/<slug>`). Sa jauge lit alors le montant collecté en direct ; si la plateforme ne répond pas, elle reste à son état initial et le bouton de don fonctionne toujours.
+
+**Habillage de saison** : un halo de couleur et quelques motifs discrets en fond (feuilles en automne, flocons en hiver, pétales au printemps, reflets de soleil en été). Le navigateur change d’habillage à 0 h, heure de Paris, le jour de l’équinoxe ou du solstice : les dates sont calculées au build (`src/lib/seasons.ts`) pour les dix années suivantes, sans nouvelle mise en ligne. Pour voir une saison avant l’heure, ajouter `?saison=printemps`, `ete`, `automne` ou `hiver` à l’adresse ; pour retirer l’habillage, passer `seasonalTheme` à `false` dans `site.ts`.
 
 **Référencement** : chaque page passe son titre et sa description à `BaseLayout` ; l’accueil décrit Chloé et Vincent en données structurées schema.org, la page Dons & infos sa FAQ. Le plan du site (`sitemap-index.xml`) est généré au build par `@astrojs/sitemap` et déclaré dans `public/robots.txt`.
 

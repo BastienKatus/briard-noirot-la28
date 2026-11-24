@@ -19,6 +19,10 @@ export const site = {
 		accessKey: 'e03ce2bb-42ed-44b2-aa28-e1bd54956dac',
 	},
 
+	// Habillage de saison (halo de couleur et motifs discrets en fond), qui change seul au jour de l'équinoxe ou du solstice.
+	// false = site toujours sans habillage. Aperçu d'une saison : ajouter ?saison=printemps, ete, automne ou hiver à l'adresse.
+	seasonalTheme: true,
+
 	nav: [
 		{ label: 'Accueil', href: '/' },
 		{ label: 'Albums', href: '/albums/' },
